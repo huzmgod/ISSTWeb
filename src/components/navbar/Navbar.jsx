@@ -6,8 +6,8 @@ import {  Link } from "react-router-dom";
 
 const Menu = () => (
   <>
-     <Link to="/"><p>Home </p> </Link>
-     <Link to="/instalaciones"><p>Instalaciones</p></Link> 
+     <Link to="/"><p className='home'>Home </p> </Link>
+     <Link to="/instalaciones"><p className='home'>Instalaciones</p></Link> 
     
   </>
  )
@@ -27,7 +27,7 @@ const Menu = () => (
     <div className='navbar'>
       <div className="navbar-links">
         <div className="navbar-links_logo">
-          <img src={logo} alt="logo" />
+          {/* <img src={logo} alt="logo" /> */}
           <Link to="/"> 
             <h1>TuComunidad</h1>
           </Link>

@@ -19,6 +19,10 @@
   color: white;
 
 }
+.navbar-links_logo:hover{
+  color: var(--third-color);
+}
+
 .navbar-links_logo h1{
   font-family: var(--font-family);
   font-weight: bold;
@@ -33,6 +37,9 @@
   flex-direction: row;
   position: relative;
   align-items: center;
+}
+.navbar-links_container .home:hover{
+  color: var(--third-color);
 }
 .navbar-links_container input {
   background: #1B1A21;

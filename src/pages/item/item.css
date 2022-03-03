@@ -86,11 +86,17 @@
   border-radius: 10px;
   border: none;
   padding: 0.75rem 3rem;
+  margin-bottom: 1rem;
   font-size: 14px;
   line-height: 21px;
   font-weight: 600;
   color: #fff;
   margin-right: 20px;
+}
+.item-content-buy .primary-btn:hover{
+  border-radius: 10px;
+  border: 1px solid var(--primary-color);
+   
 }
 .item-content-buy .secondary-btn{
   background: transparent;

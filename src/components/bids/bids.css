@@ -23,6 +23,11 @@
   margin-top: 5px;
   margin-right: 7px;
 }
+.time-button:hover{
+  background-color: var(--third-color);
+  color: var(--primary-color);
+}
+
 .bids-title{
   color: var(--primary-color);
   padding-top: 2.5%;

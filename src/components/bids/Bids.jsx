@@ -23,7 +23,9 @@ const Bids = ({ title }) => {
           <div className="card-column" >
             <div className="bids-card">
               <div className="bids-card-top">
-                <img src={bids1} alt="" />
+                <Link to={`/post/123`}>
+                  <img src={bids1} alt="" />
+                </Link>
                 <Link to={`/post/123`}>
                   <h2 className="bids-title">Padel</h2>
                 </Link>
@@ -32,6 +34,7 @@ const Bids = ({ title }) => {
                 <div className='time-row'>
                   <ScrollMenu >
                     <button className='time-button'>09:30</button>
+                    {/* <button className='time-button'>09:30</button>
                     <button className='time-button'>09:30</button>
                     <button className='time-button'>09:30</button>
                     <button className='time-button'>09:30</button>
@@ -46,8 +49,7 @@ const Bids = ({ title }) => {
                     <button className='time-button'>09:30</button>
                     <button className='time-button'>09:30</button>
                     <button className='time-button'>09:30</button>
-                    <button className='time-button'>09:30</button>
-                    <button className='time-button'>09:30</button>
+                    <button className='time-button'>09:30</button> */}
 
                   </ScrollMenu>
 

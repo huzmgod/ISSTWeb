@@ -14,22 +14,30 @@ const Item = () => {
         </div>
           <div className="item-content">
             <div className="item-content-title">
-              <h1>Abstact Smoke Red Blue</h1>
-              <p>From <span>4.5 ETH</span> ‧ 20 of 25 available</p>
+              <h1>Pádel: Pista 1</h1>
+              <p>Desde <span>5€/hora</span> </p>
             </div>
-            <div className="item-content-creator">
-              <div><p>Creater</p></div>
-              <div>
-                <img src={creator} alt="creator" />
-                <p>Rian Leon </p>
-              </div>
-            </div>
+            
             <div className="item-content-detail">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+              <p></p>
             </div>
             <div className="item-content-buy">
-              <button className="primary-btn">Buy For 4.5 ETH</button>
-              <button className="secondary-btn">Make Offer</button>
+              <button className="primary-btn">09:00</button>
+              <button className="primary-btn">10:00</button>
+              <button className="primary-btn">11:00</button>
+              <button className="primary-btn">12:00</button>
+              <button className="primary-btn">13:00</button>
+              <button className="primary-btn">14:00</button>
+              <button className="primary-btn">15:00</button>
+              <button className="primary-btn">16:00</button>
+              <button className="primary-btn">17:00</button>
+              <button className="primary-btn">18:00</button>
+              <button className="primary-btn">19:00</button>
+              <button className="primary-btn">20:00</button>
+              <button className="primary-btn">21:00</button>
+              <button className="primary-btn">22:00</button>
+              <button className="primary-btn">23:00</button>
+              <button className="secondary-btn">Reservar</button>
             </div>
           </div>
       </div>
