@@ -1,5 +1,5 @@
 <div align="center">
-      <h1> <img src="https://www.thewindowsclub.com/wp-content/uploads/2021/03/Etherium.png" width="500px"><br/>NFT Marketplace</h1>
+      <h1>TuComunidad</h1>
      </div>
 
 # Description
@@ -8,8 +8,6 @@ TuComunidad
 # Tech Used
  ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
       
-## Live Preview
-[Demo](https://nft-marketplace-ui.netlify.app/)
 
 ## Build Setup
 
@@ -37,14 +35,4 @@ $ npm start
     
     Figma : https://uifreebies.net/figma/cryptoket-app-ui-kit-free
     
-
-### Task
-- [x] Home page
-- [x] Detail page
-- [x] Login page
-- [x] Register page
-- [x] Create item page
-- [x] Profile page
-- [ ] Payment
-
  
