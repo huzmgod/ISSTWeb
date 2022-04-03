@@ -75,7 +75,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-  
+
 
   const LoginSchema = Yup.object().shape({
     usernameOrEmail: Yup
@@ -130,9 +130,9 @@ export const Login = () => {
         console.log(res)
         if (resData != null) {
           console.log("nice user")
+          sessionStorage.setItem("formBody", formBody)
 
           setBool(true);
-          localStorage.setItem("bool", true);
           setId(resData.id);
           setNombre(resData.nombre);
           setApellidos(resData.apellidos);
@@ -141,15 +141,7 @@ export const Login = () => {
           setPiso(resData.piso);
           setRol(resData.rol);
           setComunidades(resData.comunidades);
-          // console.log(bool)
-          // console.log(id)
-          // console.log(nombre)
-          // console.log(apellidos)
-          // console.log(email)
-          // console.log(password)
-          // console.log(piso)
-          // console.log(rol)
-          // console.log(comunidades)
+          
           const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
           console.log(comunityData)
           const comunity = await comunityData.json();
@@ -177,60 +169,60 @@ export const Login = () => {
 
     <>
 
-        <div className='login section__padding'>
-          <div className="login-container">
-            <FormikProvider value={formik}>
-              <h1>Login</h1>
-              <form className='login-writeForm' autoComplete='off' onSubmit={handleSubmit}>
-                <div className="login-formGroup">
-                  <label>Email</label>
-                  <TextField
-                    fullWidth
-                    autoComplete="email"
-                    type="text"
-                    {...getFieldProps('usernameOrEmail')}
-                    error={Boolean(touched.usernameOrEmail && errors.usernameOrEmail) || loginError}
-                    helperText={touched.usernameOrEmail && errors.usernameOrEmail}
+      <div className='login section__padding'>
+        <div className="login-container">
+          <FormikProvider value={formik}>
+            <h1>Login</h1>
+            <form className='login-writeForm' autoComplete='off' onSubmit={handleSubmit}>
+              <div className="login-formGroup">
+                <label>Email</label>
+                <TextField
+                  fullWidth
+                  autoComplete="email"
+                  type="text"
+                  {...getFieldProps('usernameOrEmail')}
+                  error={Boolean(touched.usernameOrEmail && errors.usernameOrEmail) || loginError}
+                  helperText={touched.usernameOrEmail && errors.usernameOrEmail}
 
-                  />
-                </div>
-                <div className="login-formGroup">
-                  <label>Password</label>
-                  <TextField
-                    fullWidth
-                    autoComplete="current-password"
-                    type={showPassword ? 'text' : 'password'}
-                    {...getFieldProps('password')}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handleShowPassword} edge="end">
-                            <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
-                    error={Boolean(touched.password && errors.password) || loginError}
-                    helperText={loginError ? 'Username or password incorrect' : (touched.password && errors.password)}
-                  />
-                </div>
+                />
+              </div>
+              <div className="login-formGroup">
+                <label>Password</label>
+                <TextField
+                  fullWidth
+                  autoComplete="current-password"
+                  type={showPassword ? 'text' : 'password'}
+                  {...getFieldProps('password')}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleShowPassword} edge="end">
+                          <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                  error={Boolean(touched.password && errors.password) || loginError}
+                  helperText={loginError ? 'Username or password incorrect' : (touched.password && errors.password)}
+                />
+              </div>
 
-                <div className="login-button">
-                  <Link to="/home">
-                    <button className='login-writeButton' type='submit' onClick={handleSubmit}>Login</button>
-                  </Link>
-                  <Link to="/register">
-                    <button className='login-reg-writeButton' type='submit'>Register</button>
-                  </Link>
+              <div className="login-button">
+                <Link to="/home">
+                  <button className='login-writeButton' type='submit' onClick={handleSubmit}>Login</button>
+                </Link>
+                <Link to="/register">
+                  <button className='login-reg-writeButton' type='submit'>Register</button>
+                </Link>
 
-                </div>
-              </form>
-            </FormikProvider>
+              </div>
+            </form>
+          </FormikProvider>
 
 
-          </div>
         </div>
-      
+      </div>
+
     </>
 
   )

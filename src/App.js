@@ -3,10 +3,11 @@ import { Navbar, Footer } from './components'
 import { Home, Profile, Item, Create, Login, Register } from './pages'
 import NavbarLogged from './components/navbarLogged/NavbarLogged';
 import Instalaciones from './instalaciones/instalaciones';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserContext from './components/UserContext';
 import RouteConfig from './RouteConfig';
 import ComunityContext from './components/ComunityContext';
+import { URLBACKEND } from './constants/constants';
 
 function App() {
   const [bool, setBool] = useState(false);
@@ -27,6 +28,56 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [votaciones, setVotaciones] = useState([]);
   const [instalaciones, setInstalaciones] = useState([]);
+
+  useEffect(() => {
+    var formBody = sessionStorage.getItem("formBody")
+    if (formBody != null) {
+      async function fetchData() {
+        try {
+
+          const res = await fetch(`${URLBACKEND}/usuario/login?`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body: formBody,
+          });
+          console.log(res)
+          if (res.status === 200) {
+            const resData = await res.json();
+            console.log(res)
+            if (resData != null) {
+
+
+              setBool(true);
+              setId(resData.id);
+              setNombre(resData.nombre);
+              setApellidos(resData.apellidos);
+              setEmail(resData.email);
+              setPassword(resData.password);
+              setPiso(resData.piso);
+              setRol(resData.rol);
+              setComunidades(resData.comunidades);
+
+              const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+              const comunity = await comunityData.json();
+              setIdCom(comunity.id);
+              setCalle(comunity.calle);
+              setNumero(comunity.numero);
+              setCpostal(comunity.cpostal);
+              setComunityCode(comunity.comunityCode);
+              setPosts(comunity.posts);
+              setVotaciones(comunity.votaciones);
+              setInstalaciones(comunity.instalaciones);
+            }
+          }
+        } catch (error) {
+          return console.error(error);
+        }
+      }
+      fetchData();
+    }
+  }, [])
 
   return (
 

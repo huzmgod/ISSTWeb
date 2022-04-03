@@ -14,8 +14,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CommentIcon from '@mui/icons-material/Comment';
 import logo from '../../assets/Logo.svg';
+import { URLBACKEND } from '../../constants/constants';
+import { createConfirmation } from 'react-confirm';
+import { string } from 'yup';
+import YourDialog from '../../YourDialog';
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -27,6 +33,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+export const confirm = createConfirmation(YourDialog);
+
 export default function CardForum(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [btnPressed, setBtnPressed] = React.useState(false);
@@ -36,29 +44,36 @@ export default function CardForum(props) {
   const handleBtnPressed = () => {
     setBtnPressed(!btnPressed);
   };
-  
+
+
+  const handleDelete = async () => {
+
+    alert("¿Seguro?. Esta acción no se puede deshacer");
+    
+      const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post/delete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: props.id,
+      });
+  }
   return (
-    <Card sx={{ paddingBottom:'10px',marginBottom:'20px', maxWidth: "97%", backgroundColor:'white' }}>
+    <Card sx={{ paddingBottom: '10px', marginBottom: '20px', maxWidth: "97%", backgroundColor: 'white' }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ height: '50px', width:'50px', bgcolor: "#FF7517" }} >
-          <img src={logo} alt="logo" style={{width:'60px'}}/>
+          <Avatar sx={{ height: '50px', width: '50px', bgcolor: "#FF7517" }} >
+            <img src={logo} alt="logo" style={{ width: '60px' }} />
           </Avatar>
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <DeleteIcon onClick={handleDelete} />
           </IconButton>
         }
         title={props.titulo}
         subheader={props.autor}
       />
-      {/* <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      /> */}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.cuerpo}
@@ -66,7 +81,7 @@ export default function CardForum(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed}/>
+          <FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed} />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />

@@ -12,14 +12,17 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = () => {
+  const navigate = useNavigate();
   const bool = useContext(UserContext).bool;
 
   const comunidades = useContext(UserContext).comunidades;
   const posts = useContext(ComunityContext).posts;
   const votaciones = useContext(ComunityContext).votaciones;
-
+  const comunityCode = useContext(ComunityContext).comunityCode;
   const forumCards = () => {
     let items = [];
     for (let i = 0; i < posts.length; i++) {
@@ -31,6 +34,7 @@ const Home = () => {
           cuerpo={posts[i].cuerpo}
           autor={posts[i].autor.nombre}
           upvoted={posts[i].upvoted}
+          comunityCode={comunityCode}
         />
       )
     }
@@ -60,9 +64,9 @@ const Home = () => {
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
                 >
-                  <FormControlLabel value= {votaciones[i].opcionA} control={<Radio />} label= {votaciones[i].opcionA} />
-                  <FormControlLabel value= {votaciones[i].opcionB} control={<Radio />} label= {votaciones[i].opcionB}  />
-                  <FormControlLabel value= "NS/NC" control={<Radio />} label="NS/NC" />
+                  <FormControlLabel value={votaciones[i].opcionA} control={<Radio />} label={votaciones[i].opcionA} />
+                  <FormControlLabel value={votaciones[i].opcionB} control={<Radio />} label={votaciones[i].opcionB} />
+                  <FormControlLabel value="NS/NC" control={<Radio />} label="NS/NC" />
                 </RadioGroup>
               </FormControl>
             </Box>
@@ -73,34 +77,35 @@ const Home = () => {
     return items;
   }
   return (
-     bool ? (
+    bool ? (
 
-    
-    <div className='home'>
-      <div className='forum'>
-        {forumCards()}
+
+      <div className='home'>
+        <div className='forum'>
+          {forumCards()}
+
+        </div>
+        <div className='votations'>
+          {forumVotes()}
+
+        </div>
+        {/* <Header /> */}
+        {/* <Bids title="Instalaciones"  /> */}
+        <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
+          <Fab color='warning' aria-label="add" onClick={() => navigate("/create")}>
+            <AddIcon />
+          </Fab>
+        </Box>
 
       </div>
-      <div className='votations'>
-        {forumVotes()}
-
-      </div>
-      {/* <Header /> */}
-      {/* <Bids title="Instalaciones"  /> */}
-      <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
-        <Fab color='warning' aria-label="add">
-          <AddIcon />
-        </Fab>
-      </Box>
-
-    </div>
     ) : (
       <div className='homeNotLogged'>
-        NO ESTÁS LOGEADO. NO PERTENECES A NINGUNA COMUNIDAD
-        <img src="https://tenor.com/es/ver/deal-with-it-peppa-pig-george-daddy-mommy-gif-16388811.gif" alt="peppa" style={{padding: "100px"}}/>
-        </div>
-        )
-        
+
+        NO HAS INICIADO SESIÓN. NO PERTENECES A NINGUNA COMUNIDAD
+        <img src="https://tenor.com/es/ver/deal-with-it-peppa-pig-george-daddy-mommy-gif-16388811.gif" alt="peppa" style={{ padding: "100px" }} />
+      </div>
+    )
+
   );
 };
 

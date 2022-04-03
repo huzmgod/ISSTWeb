@@ -2,9 +2,9 @@ import './create.css'
 import React from 'react';
 import Image from '../../assets/Image.png'
 import { URLBACKEND } from '../../constants/constants';
-
+import { useNavigate } from 'react-router-dom';
 const Create = (props) => {
-
+  const navigate = useNavigate();
   const autor = {
     id: props.id,
     nombre: props.nombre,
@@ -25,21 +25,24 @@ const Create = (props) => {
   const handleCuerpo = (event) => {
     setCuerpo(event.target.value);
   }
-  // const formbody = {
-  //   titulo: titulo,
-  //   cuerpo: cuerpo,
-  //   autor: autor
-  // }
+  const formbody = {
+    titulo: titulo,
+    cuerpo: cuerpo,
+    autor: autor
+  }
 
-  const handlePost =  () => {
-    var requestOpt = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({"titulo":"Viva a la pepa", "cuerpo": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book", "autor":{"id":0,"nombre":"Pedro","apellidos":["Perez","Garcia"],"email":"p.pgarcia@alumnos.upm.com","password":"1234","piso":"2A","rol":0,"comunidades":["1957"]}}),
-    };
-    fetch('http://159.89.11.206:8080/api/v1/comunidad/1957/post', requestOpt)
-        .then(response => response.json())
-        .then(data => console.log(data));
+  const handlePost = async () => {
+    console.log(props.comunityCode)
+    console.log(JSON.stringify({ titulo: titulo, cuerpo: cuerpo, autor: autor }));
+    const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formbody),
+    
+    });
+    navigate("/")
   }
   return (
     <div className='create section__padding'>
@@ -64,7 +67,7 @@ const Create = (props) => {
               <option>Otros</option>
             </select>
           </div>
-          <button className='writeButton' onClick={() => handlePost()}>Crear Post</button>
+          <button className='writeButton' onClick={handlePost}>Crear Post</button>
         </form>
       </div>
     </div>

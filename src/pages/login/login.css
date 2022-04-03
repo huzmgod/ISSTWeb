@@ -71,7 +71,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.login-writeButton{
+.login-reg-writeButton{
   /* float: right; */
   background: var(--primary-btn);
   border: none;
@@ -82,7 +82,7 @@
   font-size: 14px;
   line-height: 21px;
 }
-.login-reg-writeButton{
+.login-writeButton{
   background-color: transparent;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
