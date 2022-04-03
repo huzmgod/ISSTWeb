@@ -7,7 +7,14 @@
   border-top: 1px solid rgba(165, 165, 165, 0.1);
   padding-bottom: 2rem;
 }
-
+.footer-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+}
 .footer-btn p{
   box-sizing: border-box;
   font-family: var(--font-family);

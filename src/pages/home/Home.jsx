@@ -24,12 +24,6 @@ const Home = () => {
     <div className='home'>
       <div className='forum'>
         <CardForum />
-        <CardForum />
-        <CardForum />
-        <CardForum />
-        <CardForum />
-        <CardForum />
-        <CardForum />
       </div>
       <div className='votations'>
         <Box className="addVotation" >
