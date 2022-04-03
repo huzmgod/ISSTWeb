@@ -135,6 +135,8 @@ export const Login = () => {
             console.log(comunidades)
           }
         }
+        const comunityData = await fetch(`${URLBACKEND}/comunidad/${comunidades[0]}`);
+        console.log(comunityData)
       } catch (error) {
         console.log("bad user")
         showAlert("El usuario o contraseña han fallado", "error")
