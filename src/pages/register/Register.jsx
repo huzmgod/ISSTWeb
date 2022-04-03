@@ -29,7 +29,6 @@ const Register = () => {
     
   }
 
-
   function handleChangeNombre(event) {
     setNombre(event.target.value);
   }
