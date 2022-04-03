@@ -7,24 +7,21 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import { LoadingButton } from '@mui/lab';
 // material
 import Alert from '@mui/material/Alert';
 import { makeStyles } from '@mui/styles';
 import UserContext from '../../components/UserContext';
-import { useNavigate } from 'react-router';
 import {
-  Stack,
-  Checkbox,
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel
 } from '@mui/material';
 import ComunityContext from '../../components/ComunityContext';
 // Constants
 import { URLBACKEND } from '../../constants/constants';
 import { Home } from '..';
+import { useNavigate } from 'react-router-dom';
+
 const useStyle = makeStyles({
   input: {
     color: "white",
@@ -37,6 +34,7 @@ const showAlert = (message, severity) => {
 }
 
 export const Login = () => {
+  const navigate = useNavigate();
   const bool = useContext(UserContext).bool;
   const id = useContext(UserContext).id;
   const nombre = useContext(UserContext).nombre;
@@ -77,6 +75,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  
 
   const LoginSchema = Yup.object().shape({
     usernameOrEmail: Yup
@@ -133,6 +132,7 @@ export const Login = () => {
           console.log("nice user")
 
           setBool(true);
+          localStorage.setItem("bool", true);
           setId(resData.id);
           setNombre(resData.nombre);
           setApellidos(resData.apellidos);
@@ -161,6 +161,7 @@ export const Login = () => {
           setPosts(comunity.posts);
           setVotaciones(comunity.votaciones);
           setInstalaciones(comunity.instalaciones);
+          navigate("/");
         }
       }
     }
@@ -175,7 +176,6 @@ export const Login = () => {
   return (
 
     <>
-      {bool ? <Home/> : (
 
         <div className='login section__padding'>
           <div className="login-container">
@@ -230,7 +230,7 @@ export const Login = () => {
 
           </div>
         </div>
-      )}
+      
     </>
 
   )

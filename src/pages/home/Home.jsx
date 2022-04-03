@@ -1,27 +1,21 @@
-import { Bids, Header, } from '../../components'
-import bids1 from '../../assets/bids1.png'
-import bids2 from '../../assets/bids2.png'
-import bids3 from '../../assets/bids3.png'
-import bids4 from '../../assets/bids4.png'
-import bids5 from '../../assets/bids5.png'
-import bids6 from '../../assets/bids6.png'
-import bids7 from '../../assets/bids7.png'
-import bids8 from '../../assets/bids8.png'
 import './home.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import CardForum from '../../components/CardForum/CardForum';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import CardVotations from '../../components/CardForum/CardVotations'
 import ComunityContext from '../../components/ComunityContext';
 import { useContext } from 'react';
 import UserContext from '../../components/UserContext';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 const Home = () => {
+  const bool = useContext(UserContext).bool;
+
   const comunidades = useContext(UserContext).comunidades;
   const posts = useContext(ComunityContext).posts;
   const votaciones = useContext(ComunityContext).votaciones;
@@ -60,8 +54,17 @@ const Home = () => {
               votantesB={votaciones[i].votantesB}
             />
             <Box className='checkBoxes'>
-              <FormControlLabel control={<Checkbox size="small" />} label={votaciones[i].opcionA} />
-              <FormControlLabel control={<Checkbox size="small" />} label={votaciones[i].opcionB} />
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel value= {votaciones[i].opcionA} control={<Radio />} label= {votaciones[i].opcionA} />
+                  <FormControlLabel value= {votaciones[i].opcionB} control={<Radio />} label= {votaciones[i].opcionB}  />
+                  <FormControlLabel value= "NS/NC" control={<Radio />} label="NS/NC" />
+                </RadioGroup>
+              </FormControl>
             </Box>
           </Box>
         </Box>
@@ -70,6 +73,9 @@ const Home = () => {
     return items;
   }
   return (
+     bool ? (
+
+    
     <div className='home'>
       <div className='forum'>
         {forumCards()}
@@ -83,11 +89,18 @@ const Home = () => {
       {/* <Bids title="Instalaciones"  /> */}
       <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
         <Fab color='warning' aria-label="add">
-          <AddIcon/>
+          <AddIcon />
         </Fab>
       </Box>
 
     </div>
+    ) : (
+      <div className='homeNotLogged'>
+        NO ESTÁS LOGEADO. NO PERTENECES A NINGUNA COMUNIDAD
+        <img src="https://tenor.com/es/ver/deal-with-it-peppa-pig-george-daddy-mommy-gif-16388811.gif" alt="peppa" style={{padding: "100px"}}/>
+        </div>
+        )
+        
   );
 };
 

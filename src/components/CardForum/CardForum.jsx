@@ -36,7 +36,7 @@ export default function CardForum(props) {
   const handleBtnPressed = () => {
     setBtnPressed(!btnPressed);
   };
-
+  
   return (
     <Card sx={{ paddingBottom:'10px',marginBottom:'20px', maxWidth: "97%", backgroundColor:'white' }}>
       <CardHeader

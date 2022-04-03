@@ -1,65 +1,74 @@
 import './create.css'
+import React from 'react';
 import Image from '../../assets/Image.png'
-const Create = () => {
+import { URLBACKEND } from '../../constants/constants';
 
+const Create = (props) => {
+
+  const autor = {
+    id: props.id,
+    nombre: props.nombre,
+    apellidos: props.apellidos,
+    email: props.email,
+    password: props.password,
+    piso: props.piso,
+    rol: props.rol,
+    comunidades: props.comunidades
+  }
+  const [titulo, setTitulo] = React.useState('');
+  const [cuerpo, setCuerpo] = React.useState('');
+
+  const handleTitle = (event) => {
+    setTitulo(event.target.value);
+    console.log(titulo)
+  }
+  const handleCuerpo = (event) => {
+    setCuerpo(event.target.value);
+  }
+  // const formbody = {
+  //   titulo: titulo,
+  //   cuerpo: cuerpo,
+  //   autor: autor
+  // }
+
+  const handlePost =  () => {
+    var requestOpt = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"titulo":"Viva a la pepa", "cuerpo": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book", "autor":{"id":0,"nombre":"Pedro","apellidos":["Perez","Garcia"],"email":"p.pgarcia@alumnos.upm.com","password":"1234","piso":"2A","rol":0,"comunidades":["1957"]}}),
+    };
+    fetch('http://159.89.11.206:8080/api/v1/comunidad/1957/post', requestOpt)
+        .then(response => response.json())
+        .then(data => console.log(data));
+  }
   return (
     <div className='create section__padding'>
       <div className="create-container">
-        <h1>Create new Item</h1>
-        <p className='upload-file'>Upload File</p>
-        <div className="upload-img-show">
-            <h3>JPG, PNG, GIF, SVG, WEBM, MP3, MP4. Max 100mb.</h3>
-            <img src={Image} alt="banner" />
-            <p>Drag and Drop File</p>
-        </div>
+        <h1>Crear nuevo Post</h1>
         <form className='writeForm' autoComplete='off'>
-          
+
           <div className="formGroup">
-            <label>Upload</label>
-            <input type="file" className='custom-file-input'
-          />
+            <label>Titulo</label>
+            <input type="text" placeholder='Título del post' autoFocus={true} onChange={handleTitle} />
           </div>
           <div className="formGroup">
-            <label>Name</label>
-            <input type="text" placeholder='Item Name' autoFocus={true} />
+            <label>Cuerpo</label>
+            <textarea type="text" rows={8} placeholder='Descripción del post' onChange={handleCuerpo}></textarea>
           </div>
           <div className="formGroup">
-            <label>Description</label>
-            <textarea type="text" rows={4}
-          placeholder='Decription of your item' 
-          ></textarea>
-          </div>
-          <div className="formGroup">
-            <label>Price</label>
-            <div className="twoForm">
-              <input type="text" placeholder='Price'  />
-              <select>
-                <option value="ETH">ETH</option>
-                <option value="BTC">BTC</option>
-                <option value="LTC">LTC</option>
-              </select>
-            </div>
-          </div>
-          <div className="formGroup">
-            <label>Category</label>
+            <label>Categoría</label>
             <select >
-               <option>Art</option>
-               <option>Photography</option>
-               <option>Sports</option>
-               <option>Collectibles</option>
-               <option>Trading Cards</option>
-               <option>Utility</option>
+              <option>Instalación</option>
+              <option>Junta de vecinos</option>
+              <option>Mantenimiento</option>
+              <option>Otros</option>
             </select>
           </div>
-          <div className="formGroup">
-            <label>Available Items</label>
-            <input type="text" placeholder='No of Items'/>
-          </div>
-          <button className='writeButton'>Create Item</button>
+          <button className='writeButton' onClick={() => handlePost()}>Crear Post</button>
         </form>
       </div>
     </div>
-   
+
   )
 };
 
