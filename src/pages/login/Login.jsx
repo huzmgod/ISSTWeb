@@ -12,6 +12,7 @@ import { LoadingButton } from '@mui/lab';
 import Alert from '@mui/material/Alert';
 import { makeStyles } from '@mui/styles';
 import UserContext from '../../components/UserContext';
+import { useNavigate } from 'react-router';
 import {
   Stack,
   Checkbox,
@@ -20,6 +21,7 @@ import {
   InputAdornment,
   FormControlLabel
 } from '@mui/material';
+import ComunityContext from '../../components/ComunityContext';
 // Constants
 import { URLBACKEND } from '../../constants/constants';
 import { Home } from '..';
@@ -54,6 +56,22 @@ export const Login = () => {
   const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
 
+  const idCom = useContext(ComunityContext).idCom;
+  const calle = useContext(ComunityContext).calle;
+  const numero = useContext(ComunityContext).numero;
+  const cpostal = useContext(ComunityContext).cpostal;
+  const comunityCode = useContext(ComunityContext).comunityCode;
+  const posts = useContext(ComunityContext).posts;
+  const votaciones = useContext(ComunityContext).votaciones;
+  const instalaciones = useContext(ComunityContext).instalaciones;
+  const setIdCom = useContext(ComunityContext).setIdCom;
+  const setCalle = useContext(ComunityContext).setCalle;
+  const setNumero = useContext(ComunityContext).setNumero;
+  const setCpostal = useContext(ComunityContext).setCpostal;
+  const setComunityCode = useContext(ComunityContext).setComunityCode;
+  const setPosts = useContext(ComunityContext).setPosts;
+  const setVotaciones = useContext(ComunityContext).setVotaciones;
+  const setInstalaciones = useContext(ComunityContext).setInstalaciones;
 
   const styleClasses = useStyle();
   const [showPassword, setShowPassword] = useState(false);
@@ -89,57 +107,61 @@ export const Login = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      try {
-        const details = {
-          email: values.usernameOrEmail,
-          password: values.password,
-        };
-        let formBody = [];
-        for (var property in details) {
-          const encodedKey = encodeURIComponent(property);
-          const encodedValue = encodeURIComponent(details[property]);
-          formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        const res = await fetch(`${URLBACKEND}/usuario/login?`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          },
-          body: formBody,
-        });
+      const details = {
+        email: values.usernameOrEmail,
+        password: values.password,
+      };
+      let formBody = [];
+      for (var property in details) {
+        const encodedKey = encodeURIComponent(property);
+        const encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+      const res = await fetch(`${URLBACKEND}/usuario/login?`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: formBody,
+      });
+      console.log(res)
+      if (res.status === 200) {
+        const resData = await res.json();
         console.log(res)
-        if (res.status === 200) {
-          const resData = await res.json();
-          console.log(res)
-          if (resData != null) {
-            console.log("nice user")
+        if (resData != null) {
+          console.log("nice user")
 
-            setBool(true);
-            setId(resData.id);
-            setNombre(resData.nombre);
-            setApellidos(resData.apellidos);
-            setEmail(resData.email);
-            setPassword(resData.password);
-            setPiso(resData.piso);
-            setRol(resData.rol);
-            setComunidades(resData.comunidades);
-            console.log(bool)
-            console.log(id)
-            console.log(nombre)
-            console.log(apellidos)
-            console.log(email)
-            console.log(password)
-            console.log(piso)
-            console.log(rol)
-            console.log(comunidades)
-          }
+          setBool(true);
+          setId(resData.id);
+          setNombre(resData.nombre);
+          setApellidos(resData.apellidos);
+          setEmail(resData.email);
+          setPassword(resData.password);
+          setPiso(resData.piso);
+          setRol(resData.rol);
+          setComunidades(resData.comunidades);
+          // console.log(bool)
+          // console.log(id)
+          // console.log(nombre)
+          // console.log(apellidos)
+          // console.log(email)
+          // console.log(password)
+          // console.log(piso)
+          // console.log(rol)
+          // console.log(comunidades)
+          const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+          console.log(comunityData)
+          const comunity = await comunityData.json();
+          setIdCom(comunity.id);
+          setCalle(comunity.calle);
+          setNumero(comunity.numero);
+          setCpostal(comunity.cpostal);
+          setComunityCode(comunity.comunityCode);
+          setPosts(comunity.posts);
+          setVotaciones(comunity.votaciones);
+          setInstalaciones(comunity.instalaciones);
         }
-        const comunityData = await fetch(`${URLBACKEND}/comunidad/${comunidades[0]}`);
-        console.log(comunityData)
-      } catch (error) {
-        console.log("bad user")
-        showAlert("El usuario o contraseña han fallado", "error")
       }
     }
   }
@@ -150,11 +172,10 @@ export const Login = () => {
     setShowPassword((show) => !show);
   };
 
-
   return (
 
     <>
-      {bool ? <Home /> : (
+      {bool ? <Home/> : (
 
         <div className='login section__padding'>
           <div className="login-container">

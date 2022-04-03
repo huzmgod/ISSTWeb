@@ -6,6 +6,7 @@ import Instalaciones from './instalaciones/instalaciones';
 import { useState } from 'react';
 import UserContext from './components/UserContext';
 import RouteConfig from './RouteConfig';
+import ComunityContext from './components/ComunityContext';
 
 function App() {
   const [bool, setBool] = useState(false);
@@ -17,6 +18,15 @@ function App() {
   const [piso, setPiso] = useState(null);
   const [rol, setRol] = useState(0);
   const [comunidades, setComunidades] = useState([]);
+
+  const [idCom, setIdCom] = useState(0);
+  const [calle, setCalle] = useState("");
+  const [numero, setNumero] = useState(0);
+  const [cpostal, setCpostal] = useState("");
+  const [comunityCode, setComunityCode] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [votaciones, setVotaciones] = useState([]);
+  const [instalaciones, setInstalaciones] = useState([]);
 
   return (
 
@@ -41,8 +51,27 @@ function App() {
         comunidades: comunidades,
         setComunidades: setComunidades
       }}>
-        <RouteConfig />
-        <Footer />
+        <ComunityContext.Provider value={{
+          idCom: idCom,
+          calle: calle,
+          numero: numero,
+          cpostal: cpostal,
+          comunityCode: comunityCode,
+          posts: posts,
+          votaciones: votaciones,
+          instalaciones: instalaciones,
+          setIdCom: setIdCom,
+          setCalle: setCalle,
+          setNumero: setNumero,
+          setCpostal: setCpostal,
+          setComunityCode: setComunityCode,
+          setPosts: setPosts,
+          setVotaciones: setVotaciones,
+          setInstalaciones: setInstalaciones
+        }}>
+          <RouteConfig />
+          <Footer />
+        </ComunityContext.Provider>
       </UserContext.Provider>
     </div>
 

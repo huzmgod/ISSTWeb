@@ -17,59 +17,73 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import CardVotations from '../../components/CardForum/CardVotations'
+import ComunityContext from '../../components/ComunityContext';
+import { useContext } from 'react';
+import UserContext from '../../components/UserContext';
 
 const Home = () => {
+  const comunidades = useContext(UserContext).comunidades;
+  const posts = useContext(ComunityContext).posts;
+  const votaciones = useContext(ComunityContext).votaciones;
 
+  const forumCards = () => {
+    let items = [];
+    for (let i = 0; i < posts.length; i++) {
+      items.push(
+        <CardForum
+          key={i}
+          id={posts[i].id}
+          titulo={posts[i].titulo}
+          cuerpo={posts[i].cuerpo}
+          autor={posts[i].autor.nombre}
+          upvoted={posts[i].upvoted}
+        />
+      )
+    }
+    return items;
+  }
+
+  const forumVotes = () => {
+    let items = [];
+    for (let i = 0; i < votaciones.length; i++) {
+      items.push(
+        <Box className="addVotation" >
+          <Box className='description' >
+            <CardVotations
+              key={i}
+              id={votaciones[i].id}
+              titulo={votaciones[i].titulo}
+              autor={votaciones[i].autor.nombre}
+              opcionA={votaciones[i].opcionA}
+              opcionB={votaciones[i].opcionB}
+              votantesA={votaciones[i].votantesA}
+              votantesB={votaciones[i].votantesB}
+            />
+            <Box className='checkBoxes'>
+              <FormControlLabel control={<Checkbox size="small" />} label={votaciones[i].opcionA} />
+              <FormControlLabel control={<Checkbox size="small" />} label={votaciones[i].opcionB} />
+            </Box>
+          </Box>
+        </Box>
+      )
+    }
+    return items;
+  }
   return (
     <div className='home'>
       <div className='forum'>
-        <CardForum />
+        {forumCards()}
+
       </div>
       <div className='votations'>
-        <Box className="addVotation" >
-          <Box className='description' >
-            <CardVotations />
-            <Box className='checkBoxes'>
-              <FormControlLabel control={<Checkbox size="small" />} label="Sí" />
-              <FormControlLabel control={<Checkbox size="small" />} label="No" />
-            </Box>
-          </Box>
-       </Box>
-       <Box className="addVotation" >
-          <Box className='description' >
-            <CardVotations />
-            <Box className='checkBoxes'>
-              <FormControlLabel control={<Checkbox size="small" />} label="Sí" />
-              <FormControlLabel control={<Checkbox size="small" />} label="No" />
-            </Box>
-          </Box>
-       </Box>
-       <Box className="addVotation" >
-          <Box className='description' >
-            <CardVotations />
-            <Box className='checkBoxes'>
-              <FormControlLabel control={<Checkbox size="small" />} label="Sí" />
-              <FormControlLabel control={<Checkbox size="small" />} label="No" />
-            </Box>
-          </Box>
-       </Box>
-       <Box className="addVotation" >
-          <Box className='description' >
-            <CardVotations />
-            <Box className='checkBoxes'>
-              <FormControlLabel control={<Checkbox size="small" />} label="Sí" />
-              <FormControlLabel control={<Checkbox size="small" />} label="No" />
-            </Box>
-          </Box>
-       </Box>
-
+        {forumVotes()}
 
       </div>
       {/* <Header /> */}
       {/* <Bids title="Instalaciones"  /> */}
       <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
         <Fab color='warning' aria-label="add">
-          <AddIcon />
+          <AddIcon/>
         </Fab>
       </Box>
 

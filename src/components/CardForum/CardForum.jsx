@@ -15,7 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CommentIcon from '@mui/icons-material/Comment';
-
+import logo from '../../assets/Logo.svg';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -27,11 +27,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CardForum() {
+export default function CardForum(props) {
   const [expanded, setExpanded] = React.useState(false);
-
+  const [btnPressed, setBtnPressed] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const handleBtnPressed = () => {
+    setBtnPressed(!btnPressed);
   };
 
   return (
@@ -39,7 +42,7 @@ export default function CardForum() {
       <CardHeader
         avatar={
           <Avatar sx={{ height: '50px', width:'50px', bgcolor: "#FF7517" }} >
-            Tumami
+          <img src={logo} alt="logo" style={{width:'60px'}}/>
           </Avatar>
         }
         action={
@@ -47,8 +50,8 @@ export default function CardForum() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Misko_johnes"
-        subheader="Autopista del diablo"
+        title={props.titulo}
+        subheader={props.autor}
       />
       {/* <CardMedia
         component="img"
@@ -58,12 +61,12 @@ export default function CardForum() {
       /> */}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          La autopista del diabolo hijos del gran Ra
+          {props.cuerpo}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed}/>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
@@ -82,32 +85,7 @@ export default function CardForum() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>¿Qué sucedió?</Typography>
-          <Typography paragraph>
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-          </Typography>
-          <Typography paragraph>
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-          </Typography>
-          <Typography paragraph>
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-          </Typography>
-          <Typography>
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            Los hijos del gran Ra eran hijos de la descendencia de Ra en Rameshbabu
-            
-          </Typography>
+          <Typography paragraph>{props.cuerpo}</Typography>
         </CardContent>
       </Collapse>
     </Card>
