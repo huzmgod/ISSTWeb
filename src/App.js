@@ -1,8 +1,5 @@
 import './App.css';
-import { Navbar, Footer } from './components'
-import { Home, Profile, Item, Create, Login, Register } from './pages'
-import NavbarLogged from './components/navbarLogged/NavbarLogged';
-import Instalaciones from './instalaciones/instalaciones';
+import { Footer } from './components'
 import { useState, useEffect } from 'react';
 import UserContext from './components/UserContext';
 import RouteConfig from './RouteConfig';

@@ -8,7 +8,6 @@ import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
-import Alert from '@mui/material/Alert';
 import { makeStyles } from '@mui/styles';
 import UserContext from '../../components/UserContext';
 import {
@@ -19,7 +18,6 @@ import {
 import ComunityContext from '../../components/ComunityContext';
 // Constants
 import { URLBACKEND } from '../../constants/constants';
-import { Home } from '..';
 import { useNavigate } from 'react-router-dom';
 
 const useStyle = makeStyles({
@@ -29,21 +27,17 @@ const useStyle = makeStyles({
   }
 });
 
-const showAlert = (message, severity) => {
-  return <Alert severity={severity}>{message}</Alert>
-}
-
 export const Login = () => {
   const navigate = useNavigate();
-  const bool = useContext(UserContext).bool;
-  const id = useContext(UserContext).id;
-  const nombre = useContext(UserContext).nombre;
-  const apellidos = useContext(UserContext).apellidos;
-  const email = useContext(UserContext).email;
-  const password = useContext(UserContext).password;
-  const piso = useContext(UserContext).piso;
-  const rol = useContext(UserContext).rol;
-  const comunidades = useContext(UserContext).comunidades;
+  // const bool = useContext(UserContext).bool;
+  // const id = useContext(UserContext).id;
+  // const nombre = useContext(UserContext).nombre;
+  // const apellidos = useContext(UserContext).apellidos;
+  // const email = useContext(UserContext).email;
+  // const password = useContext(UserContext).password;
+  // const piso = useContext(UserContext).piso;
+  // const rol = useContext(UserContext).rol;
+  // const comunidades = useContext(UserContext).comunidades;
   const setBool = useContext(UserContext).setBool;
   const setId = useContext(UserContext).setId;
   const setNombre = useContext(UserContext).setNombre;
@@ -54,14 +48,14 @@ export const Login = () => {
   const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
 
-  const idCom = useContext(ComunityContext).idCom;
-  const calle = useContext(ComunityContext).calle;
-  const numero = useContext(ComunityContext).numero;
-  const cpostal = useContext(ComunityContext).cpostal;
-  const comunityCode = useContext(ComunityContext).comunityCode;
-  const posts = useContext(ComunityContext).posts;
-  const votaciones = useContext(ComunityContext).votaciones;
-  const instalaciones = useContext(ComunityContext).instalaciones;
+  // const idCom = useContext(ComunityContext).idCom;
+  // const calle = useContext(ComunityContext).calle;
+  // const numero = useContext(ComunityContext).numero;
+  // const cpostal = useContext(ComunityContext).cpostal;
+  // const comunityCode = useContext(ComunityContext).comunityCode;
+  // const posts = useContext(ComunityContext).posts;
+  // const votaciones = useContext(ComunityContext).votaciones;
+  // const instalaciones = useContext(ComunityContext).instalaciones;
   const setIdCom = useContext(ComunityContext).setIdCom;
   const setCalle = useContext(ComunityContext).setCalle;
   const setNumero = useContext(ComunityContext).setNumero;
@@ -71,10 +65,10 @@ export const Login = () => {
   const setVotaciones = useContext(ComunityContext).setVotaciones;
   const setInstalaciones = useContext(ComunityContext).setInstalaciones;
 
-  const styleClasses = useStyle();
+  // const styleClasses = useStyle();
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  // const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
 
   const LoginSchema = Yup.object().shape({
@@ -162,7 +156,7 @@ export const Login = () => {
   }
   );
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };

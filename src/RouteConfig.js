@@ -1,16 +1,14 @@
 
 import './App.css';
-import { Navbar, Footer } from './components'
+import { Navbar} from './components'
 import { Home, Profile, Item, Create, Login, Register } from './pages'
 import {
     BrowserRouter as Router,
     Routes,
     Route,
-    NavLink
 } from "react-router-dom";
-import NavbarLogged from './components/navbarLogged/NavbarLogged';
 import Instalaciones from './instalaciones/instalaciones';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import UserContext from './components/UserContext';
 import ComunityContext from './components/ComunityContext';
 
@@ -24,14 +22,14 @@ export default function RouteConfig() {
     const piso = useContext(UserContext).piso;
     const rol = useContext(UserContext).rol;
     const comunidades = useContext(UserContext).comunidades;
-    const idCom = useContext(ComunityContext).idCom;
-    const calle = useContext(ComunityContext).calle;
-    const numero = useContext(ComunityContext).numero;
-    const cpostal = useContext(ComunityContext).cpostal;
+    // const idCom = useContext(ComunityContext).idCom;
+    // const calle = useContext(ComunityContext).calle;
+    // const numero = useContext(ComunityContext).numero;
+    // const cpostal = useContext(ComunityContext).cpostal;
     const comunityCode = useContext(ComunityContext).comunityCode;
     const posts = useContext(ComunityContext).posts;
-    const votaciones = useContext(ComunityContext).votaciones;
-    const instalaciones = useContext(ComunityContext).instalaciones;
+    // const votaciones = useContext(ComunityContext).votaciones;
+    // const instalaciones = useContext(ComunityContext).instalaciones;
 
 
     const routes = [
