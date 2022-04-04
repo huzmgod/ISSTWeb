@@ -7,6 +7,7 @@ import Alert from '@mui/material/Alert';
 import { Sledding } from '@mui/icons-material';
 import { StyledEngineProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import utf8 from 'utf8';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,11 +20,11 @@ const Register = () => {
 
   const handleRegister = async () => {
     const formbody = {
-      nombre : nombre,
-      apellidos : apellidos.split(' '),
-      email : email,
-      password : password,
-      piso : piso,
+      nombre: nombre,
+      apellidos: apellidos.split(' '),
+      email: utf8.encode(email),
+      password: password,
+      piso: piso,
     };
     console.log(formbody)
     const comFormBody = {
@@ -31,7 +32,7 @@ const Register = () => {
       email: formbody.email,
       password: formbody.password,
     };
-  
+
     const res = await fetch(`${URLBACKEND}/usuario/register`, {
       method: "POST",
       headers: {
