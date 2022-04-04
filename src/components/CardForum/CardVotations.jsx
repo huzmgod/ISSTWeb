@@ -50,7 +50,7 @@ export default function CardVotations(props) {
       <CardContent>
 
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Descripción:
+          Esta votación caduca en 3 dias
         </Typography>
 
         <Typography color="text.secondary">
@@ -62,7 +62,6 @@ export default function CardVotations(props) {
       </CardActions> */}
 
 
-      )
     </Card>
   );
 }
