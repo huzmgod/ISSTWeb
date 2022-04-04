@@ -9,6 +9,8 @@ import bids5 from '../../assets/bids5.png'
 import bids6 from '../../assets/bids6.png'
 import bids7 from '../../assets/bids7.png'
 import bids8 from '../../assets/bids8.png'
+import piscina from '../../assets/piscina.jpg'
+import padel from '../../assets/padel.jpg'
 import { Link } from 'react-router-dom';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import UserContext from '../UserContext';
@@ -44,7 +46,12 @@ const Bids = (props) => {
 
   const facilityCard = () => {
     let items = [];
+    let zonas = {
+      piscina: <img src={piscina} alt="piscina" />,
+      padel: <img src={padel} alt="padel" />,
+    }
     for (let i = 0; i < props.instalaciones.length; i++) {
+      console.log(props.instalaciones[i].nombre)
       items.push(
         <React.Fragment key={i}>
           <div className="bids-container-card">
@@ -52,7 +59,8 @@ const Bids = (props) => {
               <div className="bids-card">
                 <div className="bids-card-top">
                   <Link to={`/instalaciones/${i}`}>
-                    <img src={props.instalaciones[i].url} alt="" />
+                    {/* <img src={piscina} alt="piscina" /> */}
+                    {zonas[props.instalaciones[i].nombre]}
                   </Link>
                   <Link to={`/instalaciones/${i}`}>
                     <h2 className="bids-title">{props.instalaciones[i].nombre}</h2>

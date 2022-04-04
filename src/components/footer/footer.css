@@ -7,6 +7,8 @@
   align-items: center;
   background: var(--color-footer);
   border-top: 1px solid rgba(165, 165, 165, 0.1);
+  position:fixed;
+  bottom:0;
 }
 .footer-data {
   display: flex;
