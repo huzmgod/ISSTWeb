@@ -2,24 +2,20 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CommentIcon from '@mui/icons-material/Comment';
 import logo from '../../assets/Logo.svg';
 import { URLBACKEND } from '../../constants/constants';
 import { createConfirmation } from 'react-confirm';
-import { string } from 'yup';
 import YourDialog from '../../YourDialog';
 
 const ExpandMore = styled((props) => {
@@ -49,31 +45,42 @@ export default function CardForum(props) {
   const handleDelete = async () => {
 
     alert("¿Seguro?. Esta acción no se puede deshacer");
-    
-      const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post/delete`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: props.id,
-      });
+
+    const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post/delete`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: props.id,
+    });
   }
   return (
     <Card sx={{ paddingBottom: '10px', marginBottom: '20px', maxWidth: "97%", backgroundColor: 'white' }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ height: '50px', width: '50px', bgcolor: "#FF7517" }} >
-            <img src={logo} alt="logo" style={{ width: '60px' }} />
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <DeleteIcon onClick={handleDelete} />
-          </IconButton>
-        }
-        title={props.titulo}
-        subheader={props.autor}
-      />
+      {props.idLocal == props.autorId ? (
+        <CardHeader
+          avatar={
+            <Avatar sx={{ height: '50px', width: '50px', bgcolor: "#FF7517" }} >
+              <img src={logo} alt="logo" style={{ width: '60px' }} />
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <DeleteIcon onClick={handleDelete} />
+            </IconButton>
+          }
+          title={props.titulo}
+          subheader={props.autor}
+        />) : (
+        <CardHeader
+          avatar={
+            <Avatar sx={{ height: '50px', width: '50px', bgcolor: "#FF7517" }} >
+              <img src={logo} alt="logo" style={{ width: '60px' }} />
+            </Avatar>
+          }
+          title={props.titulo}
+          subheader={props.autor}
+        />
+      )}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.cuerpo}

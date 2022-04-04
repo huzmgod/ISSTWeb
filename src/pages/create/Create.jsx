@@ -32,6 +32,7 @@ const Create = (props) => {
   }
 
   const handlePost = async () => {
+    navigate("/")
     console.log(props.comunityCode)
     console.log(JSON.stringify({ titulo: titulo, cuerpo: cuerpo, autor: autor }));
     const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post`, {
@@ -42,7 +43,7 @@ const Create = (props) => {
       body: JSON.stringify(formbody),
     
     });
-    navigate("/")
+    
   }
   return (
     <div className='create section__padding'>
