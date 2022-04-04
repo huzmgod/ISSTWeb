@@ -49,16 +49,15 @@ const Bids = (props) => {
             <div className="card-column" >
               <div className="bids-card">
                 <div className="bids-card-top">
-                  <Link to={`/instalaciones/${i}`}>
-                    {/* <img src={piscina} alt="piscina" /> */}
+                  <Link to={`/instalaciones/${props.instalaciones[i].nombre}/${i}`}>
                     {zonas[props.instalaciones[i].nombre]}
                   </Link>
-                  <Link to={`/instalaciones/${i}`}>
+                  <Link to={`/instalaciones/${props.instalaciones[i].nombre}/${i}`}>
                     <h2 className="bids-title">{props.instalaciones[i].nombre}</h2>
                   </Link>
                 </div>
                 <div className="bids-card-bottom">
-                  <p>{props.instalaciones[i].precio} <span>€</span></p>
+                  <p>{props.instalaciones[i].precio} <span>€/h</span></p>
                   <p> <AiFillHeart /> 92</p>
                 </div>
                 <div className="bids-card-bottom">

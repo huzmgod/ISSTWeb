@@ -29,7 +29,7 @@ export default function RouteConfig() {
     const comunityCode = useContext(ComunityContext).comunityCode;
     const posts = useContext(ComunityContext).posts;
     // const votaciones = useContext(ComunityContext).votaciones;
-    // const instalaciones = useContext(ComunityContext).instalaciones;
+    const instalaciones = useContext(ComunityContext).instalaciones;
 
 
     const routes = [
@@ -68,8 +68,10 @@ export default function RouteConfig() {
             element: <Register />
         },
         {
-            path: ":item/:id",
-            element: <Item />
+            path: "instalaciones/:nombre/:id",
+            element: <Item 
+            instalaciones = {instalaciones}
+            />
         },
 
     ];

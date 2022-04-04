@@ -39,7 +39,7 @@ const Home = () => {
           upvoted={posts[i].upvoted}
           comunityCode={comunityCode}
           idLocal={idLocal}
-          f5= {f5}
+          f5={f5}
           setF5={setF5}
         />
       )
@@ -54,14 +54,19 @@ const Home = () => {
         <Box className="addVotation" >
           <Box className='description' >
             <CardVotations
+              comunityCode={comunityCode}
               key={i}
               id={votaciones[i].id}
+              idLocal={idLocal}
               titulo={votaciones[i].titulo}
               autor={votaciones[i].autor.nombre}
+              autorId={votaciones[i].autor.id}
               opcionA={votaciones[i].opcionA}
               opcionB={votaciones[i].opcionB}
               votantesA={votaciones[i].votantesA}
               votantesB={votaciones[i].votantesB}
+              f5={f5}
+              setF5={setF5}
             />
             <Box className='checkBoxes'>
               <FormControl>

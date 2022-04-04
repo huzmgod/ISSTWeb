@@ -1,4 +1,8 @@
 
+.bids{
+  background-color: var(--color-footer);
+}
+
 .bids-container{
   display: flex;
   flex-direction: row;
@@ -6,6 +10,7 @@
   align-items: center;
   margin: auto;
   width: 300px;
+  
 }
 .time-row{
   display: flex;

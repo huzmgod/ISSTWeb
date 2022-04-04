@@ -1,15 +1,15 @@
 import React from 'react';
 import './item.css'
 import item from '../../assets/item1.png'
+import padel from '../../assets/padel.jpg'
 
-const Item = () => {
-
-
+const Item = (props) => {
 
   return( 
+    <div className='item'>
       <div className='item section__padding'>
         <div className="item-image">
-          <img src={item} alt="item" />
+          <img src={padel} alt="item" />
         </div>
           <div className="item-content">
             <div className="item-content-title">
@@ -21,6 +21,7 @@ const Item = () => {
               <p></p>
             </div>
             <div className="item-content-buy">
+              <button className="primary-btn">08:00</button>
               <button className="primary-btn">09:00</button>
               <button className="primary-btn">10:00</button>
               <button className="primary-btn">11:00</button>
@@ -33,13 +34,11 @@ const Item = () => {
               <button className="primary-btn">18:00</button>
               <button className="primary-btn">19:00</button>
               <button className="primary-btn">20:00</button>
-              <button className="primary-btn">21:00</button>
-              <button className="primary-btn">22:00</button>
-              <button className="primary-btn">23:00</button>
               <button className="secondary-btn">Reservar</button>
             </div>
           </div>
       </div>
+    </div>
   )
 };
 

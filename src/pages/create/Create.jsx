@@ -56,7 +56,7 @@ const Create = (props) => {
 
     });
   }
-  
+
   const formBodyVot = {
     titulo: tituloVot,
     opcionA: opcionA,
@@ -88,11 +88,11 @@ const Create = (props) => {
           <form className='writeForm' autoComplete='off'>
             <div className="formGroup">
               <label>Título</label>
-              <input type="text" placeholder='Título del post' autoFocus={true} onChange={handleTitle} />
+              <input type="text" placeholder='Título del post' autoFocus={true} onChange={handleTitle} required/>
             </div>
             <div className="formGroup">
               <label>Cuerpo</label>
-              <textarea type="text" rows={8} placeholder='Descripción del post' onChange={handleCuerpo}></textarea>
+              <textarea type="text" rows={8} placeholder='Descripción del post' onChange={handleCuerpo} required></textarea>
             </div>
             <div className="formGroup">
               <label>Categoría</label>
@@ -116,15 +116,15 @@ const Create = (props) => {
 
             <div className="formGroup">
               <label>Título</label>
-              <input type="text" placeholder='Título de la votación' autoFocus={true} onChange={handleTituloVot} />
+              <input type="text" placeholder='Título de la votación' autoFocus={true} onChange={handleTituloVot} required/>
             </div>
             <div className="formGroup">
               <label>Opción A</label>
-              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionA}></textarea>
+              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionA} required></textarea>
             </div>
             <div className="formGroup">
               <label>Opción B</label>
-              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionB}></textarea>
+              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionB} required></textarea>
             </div>
             <div className="formGroup">
               <label>Categoría</label>

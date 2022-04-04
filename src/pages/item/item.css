@@ -2,6 +2,8 @@
   display: flex;
   padding: 0 6rem;
   font-family: var(--font-family);
+  background-color: var(--color-footer);
+  min-height: 600px;
 }
 .item-image{
   flex: 1;
