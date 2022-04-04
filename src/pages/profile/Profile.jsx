@@ -1,14 +1,12 @@
 import React from 'react';
 import './profile.css'
-import profile_banner from '../../assets/profile_banner.png'
-import profile_pic from '../../assets/profile.jpg'
 import Bids from '../../components/bids/Bids'
 
 const Profile = () => {
 
   return (
     <div className='profile section__padding'>
-      <div className="profile-top">
+      {/* <div className="profile-top">
         <div className="profile-banner">
           <img src={profile_banner} alt="banner" />
         </div>
@@ -28,7 +26,7 @@ const Profile = () => {
           </select>
         </div>
         <Bids   title="Item" />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -43,7 +43,7 @@ export default function CardForum(props) {
 
 
   const handleDelete = async () => {
-
+    props.setF5(!props.f5);
     alert("¿Seguro?. Esta acción no se puede deshacer");
 
     const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post/delete`, {
@@ -88,7 +88,7 @@ export default function CardForum(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed} />
+         <p style={{fontSize: "15px", fontWeight: "bold"}}><FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed} />90</p>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />

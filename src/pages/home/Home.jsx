@@ -23,6 +23,8 @@ const Home = () => {
   const posts = useContext(ComunityContext).posts;
   const votaciones = useContext(ComunityContext).votaciones;
   const comunityCode = useContext(ComunityContext).comunityCode;
+  const [f5, setF5] = React.useState(false);
+
   const forumCards = () => {
     let items = [];
     for (let i = 0; i < posts.length; i++) {
@@ -37,6 +39,8 @@ const Home = () => {
           upvoted={posts[i].upvoted}
           comunityCode={comunityCode}
           idLocal={idLocal}
+          f5= {f5}
+          setF5={setF5}
         />
       )
     }
@@ -144,12 +148,10 @@ const Home = () => {
       }
       fetchData();
     }
-  }, [])
+  }, [f5])
 
   return (
     bool ? (
-
-
       <div className='home'>
         <div className='forum'>
           {forumCards()}

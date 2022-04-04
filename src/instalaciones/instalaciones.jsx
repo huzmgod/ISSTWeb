@@ -9,6 +9,11 @@ export default function Instalaciones(){
     const instalaciones = useContext(ComunityContext).instalaciones;
     return (
 
-        <Bids title='Instalaciones'></Bids>
+        <Bids 
+        title='Instalaciones' 
+        instalaciones={instalaciones}
+        >
+
+        </Bids>
     )
 }

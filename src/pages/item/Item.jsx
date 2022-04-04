@@ -1,6 +1,5 @@
 import React from 'react';
 import './item.css'
-import creator from '../../assets/seller2.png'
 import item from '../../assets/item1.png'
 
 const Item = () => {
