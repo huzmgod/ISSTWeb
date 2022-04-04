@@ -3,8 +3,13 @@ import './register.css'
 import { Link } from 'react-router-dom'
 import Image from '../../assets/Image.png'
 import { URLBACKEND } from '../../constants/constants';
+import Alert from '@mui/material/Alert';
+import { Sledding } from '@mui/icons-material';
+import { StyledEngineProvider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [nombre, setNombre] = React.useState('');
   const [apellidos, setApellidos] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -41,7 +46,7 @@ const Register = () => {
       },
       body: JSON.stringify(comFormBody),
     });
-
+    navigate("/login");
   }
 
 

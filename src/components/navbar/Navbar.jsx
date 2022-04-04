@@ -5,11 +5,10 @@ import logo from '../../assets/Logo.svg'
 import { Link } from "react-router-dom";
 import UserContext from '../UserContext';
 import { useContext } from 'react';
-import Settings from '@mui/icons-material/Settings';
 const Menu = () => (
   <>
-    <Link to="/"><p className='home'>Home </p> </Link>
-    <Link to="/instalaciones"><p className='home'>Instalaciones</p></Link>
+    <Link to="/"><p className='home2'>Home </p> </Link>
+    <Link to="/instalaciones"><p className='home2'>Instalaciones</p></Link>
 
   </>
 )

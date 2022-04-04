@@ -20,9 +20,10 @@ const Footer = () => {
 
   return (
     <div className='footer section__padding'>
+
       <div className="footer-links">
         <div className="footer-links_logo">
-          {bool ? (
+          {/* {bool ? (
             <div className="footer-data">
               <p>{nombre}</p>
               <p>{email}</p>
@@ -30,12 +31,12 @@ const Footer = () => {
           ) : (
             <>
             </>
-          )}
+          )} */}
           <div style={{ justifyContent: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '60px' }} />
             <p>TuComunidad</p>
           </div>
-          
+
 
         </div>
 
@@ -44,6 +45,12 @@ const Footer = () => {
         <div>
           <p> © {(new Date().getFullYear())} TuComunidad</p>
         </div>
+        <div style={{display:'flex', flexDirection :'row'}}>
+          {/* <p  style={{padding: '10px'}}> Javier Madrigal Torija </p>
+          <p  style={{padding: '10px'}}> Iván Pérez Doña </p>
+          <p  style={{padding: '10px'}}> Gonzalo Núñez Muñoz </p> */}
+        </div>
+
         <div>
           <AiOutlineTwitter size={25} color='white' className='footer-icon' />
           <RiDiscordFill size={25} color='white' className='footer-icon' />

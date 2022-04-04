@@ -154,6 +154,8 @@ export const Login = () => {
           setVotaciones(comunity.votaciones);
           setInstalaciones(comunity.instalaciones);
           navigate("/");
+        }else {
+          alert("Usuario o contraseña incorrectos")
         }
       }
     }

@@ -5,6 +5,7 @@
   padding: 1rem 6rem;
   border-bottom: 1px solid rgba(165, 165, 165, 0.1);
   background-color: #FF7517;
+  height: 100px;
 }
 .navbar-links{
   flex: 1;
@@ -37,6 +38,9 @@
   flex-direction: row;
   position: relative;
   align-items: center;
+}
+.navbar-links_container .home2:hover{
+  color: var(--third-color);
 }
 .navbar-links_container .home:hover{
   color: var(--third-color);
