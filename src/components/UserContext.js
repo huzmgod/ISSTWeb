@@ -1,5 +1,7 @@
 import React from "react"
 export default React.createContext({
+    numAdmin: "",
+    isAdmin: false,
     bool: false,
     id: 0,
     nombre: "",
@@ -9,6 +11,8 @@ export default React.createContext({
     piso: null,
     rol: 0,
     comunidades: [],
+    setNumAdmin : null,
+    setIsAdmin: null,
     setBool: null,
     setId: null,
     setNombre: null,

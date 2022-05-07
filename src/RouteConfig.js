@@ -8,11 +8,15 @@ import {
     Route,
 } from "react-router-dom";
 import Instalaciones from './instalaciones/instalaciones';
+import RegisterAdmin from './pages/register/register_admin/RegisterAdmin'
+import HomeAdmin from './pages/home/homeAdmin/HomeAdmin';
+import AddComunity from './pages/create/AddComunity';
 import { useContext } from 'react';
 import UserContext from './components/UserContext';
 import ComunityContext from './components/ComunityContext';
 
 export default function RouteConfig() {
+    const numAdmin = useContext(UserContext).numAdmin;
     const bool = useContext(UserContext).bool;
     const id = useContext(UserContext).id;
     const nombre = useContext(UserContext).nombre;
@@ -73,6 +77,28 @@ export default function RouteConfig() {
             instalaciones = {instalaciones}
             />
         },
+        {
+            path : "/registerAdmin",
+            element : <RegisterAdmin/>
+
+        },
+        {
+            path : "/home/admin",
+            element: <HomeAdmin/>
+        },
+        {
+            path : "home/admin/addComunity",
+            element : <AddComunity
+                id={id}
+                nombre={nombre}
+                apellidos={apellidos}
+                email={email}
+                password={password}
+                numAdmin={numAdmin}
+                comunidades={comunidades}
+                />
+        },
+        
 
     ];
 

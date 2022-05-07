@@ -118,6 +118,14 @@ export const Login = () => {
         },
         body: formBody,
       });
+      // const res = await fetch(`${URLBACKEND}/gestor/login?`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      //   },
+      //   body: formBody,
+      // });
+
       console.log(res)
       if (res.status === 200) {
         const resData = await res.json();

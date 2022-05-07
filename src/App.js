@@ -7,6 +7,8 @@ import ComunityContext from './components/ComunityContext';
 import { URLBACKEND } from './constants/constants';
 
 function App() {
+  const [numAdmin, setNumAdmin] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const [bool, setBool] = useState(false);
   const [id, setId] = useState(0);
   const [nombre, setNombre] = useState("");
@@ -80,6 +82,10 @@ function App() {
 
     <div>
       <UserContext.Provider value={{
+        numAdmin: numAdmin,
+        setNumAdmin: setNumAdmin,
+        isAdmin: bool,
+        setIsAdmin: setIsAdmin,
         bool: bool,
         setBool: setBool,
         id: id,

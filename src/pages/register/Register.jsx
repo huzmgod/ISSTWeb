@@ -105,7 +105,9 @@ const Register = () => {
               <button className='reg-login-writeButton' >Login</button>
             </Link>
           </div>
+          
         </form>
+
       </div>
     </div>
   )

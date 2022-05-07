@@ -51,6 +51,9 @@ const Navbar = () => {
             <Link to="/register">
               <button type='button' className='secondary-btn'>Sign Up</button>
             </Link>
+            <Link to="/registerAdmin">
+              <button type='button' className='secondary-btn'>Acceso Administradores</button>
+            </Link>
           </>
         )}
       </div>
@@ -77,6 +80,9 @@ const Navbar = () => {
                   </Link>
                   <Link to="/register">
                     <button type='button' className='secondary-btn'>Sign Up</button>
+                  </Link>
+                  <Link to="/registerAdmin">
+                    <button type='button' className='secondary-btn'>Sign Up As Admin</button>
                   </Link>
                 </>
               )}
