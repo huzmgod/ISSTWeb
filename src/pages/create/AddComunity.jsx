@@ -47,8 +47,10 @@ const AddComunity = (props) => {
       },
       body: JSON.stringify(formbody),
     });
-    
-    navigate("/home/admin");
+    alert(res)
+    if(res == "Comunidad registrada con éxito"){
+      navigate("/home/admin");    
+    }
   }
 
   return (

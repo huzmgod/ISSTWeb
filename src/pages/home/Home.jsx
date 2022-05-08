@@ -23,6 +23,7 @@ const Home = () => {
   const posts = useContext(ComunityContext).posts;
   const votaciones = useContext(ComunityContext).votaciones;
   const comunityCode = useContext(ComunityContext).comunityCode;
+  const reuniones = useContext(ComunityContext).reuniones;
   const [f5, setF5] = React.useState(false);
 
   const forumCards = () => {
@@ -50,6 +51,47 @@ const Home = () => {
   const forumVotes = () => {
     let items = [];
     for (let i = 0; i < votaciones.length; i++) {
+      items.push(
+        <Box className="addVotation" >
+          <Box className='description' >
+            <CardVotations
+              comunityCode={comunityCode}
+              key={i}
+              id={votaciones[i].id}
+              idLocal={idLocal}
+              titulo={votaciones[i].titulo}
+              autor={votaciones[i].autor.nombre}
+              autorId={votaciones[i].autor.id}
+              opcionA={votaciones[i].opcionA}
+              opcionB={votaciones[i].opcionB}
+              votantesA={votaciones[i].votantesA}
+              votantesB={votaciones[i].votantesB}
+              f5={f5}
+              setF5={setF5}
+            />
+            <Box className='checkBoxes'>
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel value={votaciones[i].opcionA} control={<Radio />} label={votaciones[i].opcionA} />
+                  <FormControlLabel value={votaciones[i].opcionB} control={<Radio />} label={votaciones[i].opcionB} />
+                  <FormControlLabel value="NS/NC" control={<Radio />} label="NS/NC" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+          </Box>
+        </Box>
+      )
+    }
+    return items;
+  }
+//TODO
+  const forumMeets = () => {
+    let items = [];
+    for (let i = 0; i < reuniones.length; i++) {
       items.push(
         <Box className="addVotation" >
           <Box className='description' >

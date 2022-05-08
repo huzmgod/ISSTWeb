@@ -27,6 +27,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [votaciones, setVotaciones] = useState([]);
   const [instalaciones, setInstalaciones] = useState([]);
+  const [reuniones, setReuniones] = useState([]);
 
   useEffect(() => {
     var formBody = sessionStorage.getItem("formBody")
@@ -68,6 +69,7 @@ function App() {
               setPosts(comunity.posts);
               setVotaciones(comunity.votaciones);
               setInstalaciones(comunity.instalaciones);
+              setReuniones(comunity.reuniones);
             }
           }
         } catch (error) {
@@ -114,6 +116,7 @@ function App() {
           posts: posts,
           votaciones: votaciones,
           instalaciones: instalaciones,
+          reuniones:reuniones,
           setIdCom: setIdCom,
           setCalle: setCalle,
           setNumero: setNumero,
@@ -121,7 +124,8 @@ function App() {
           setComunityCode: setComunityCode,
           setPosts: setPosts,
           setVotaciones: setVotaciones,
-          setInstalaciones: setInstalaciones
+          setInstalaciones: setInstalaciones,
+          setReuniones:reuniones
         }}>
           <RouteConfig />
           <Footer />

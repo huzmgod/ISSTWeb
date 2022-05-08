@@ -9,6 +9,7 @@ export default React.createContext({
     posts: [],
     votaciones: [],
     instalaciones: [],
+    reuniones: [],
     setIdCom: null,
     setCalle: null,
     setNumero: null,
@@ -16,5 +17,6 @@ export default React.createContext({
     setComunityCode: null,
     setPosts: null,
     setVotaciones: null,
-    setInstalaciones: null
+    setInstalaciones: null,
+    setReuniones: null
 })

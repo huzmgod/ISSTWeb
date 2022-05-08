@@ -1,8 +1,13 @@
 import './create.css'
 import React from 'react';
 import Image from '../../assets/Image.png'
-import { URLBACKEND } from '../../constants/constants';
 import { useNavigate } from 'react-router-dom';
+import Create_Post from './Create_Post.jsx';
+import Create_Votation from './Create_Votation.jsx';
+import Create_Meeting from './Create_Meeting';
+
+
+
 const Create = (props) => {
   const navigate = useNavigate();
   const autor = {
@@ -15,162 +20,53 @@ const Create = (props) => {
     rol: props.rol,
     comunidades: props.comunidades
   }
-  const [titulo, setTitulo] = React.useState('');
-  const [cuerpo, setCuerpo] = React.useState('');
-  const [tituloVot, setTituloVot] = React.useState('');
-  const [opcionA, setOpcionA] = React.useState('');
-  const [opcionB, setOpcionB] = React.useState('');
 
-  const handleTitle = (event) => {
-    setTitulo(event.target.value);
-    console.log(titulo)
-  }
-  const handleCuerpo = (event) => {
-    setCuerpo(event.target.value);
-  }
-  const handleTituloVot = (event) => {
-    setTituloVot(event.target.value);
-  }
-  const handleOpcionA = (event) => {
-    setOpcionA(event.target.value);
-  }
-  const handleOpcionB = (event) => {
-    setOpcionB(event.target.value);
-  }
-  const formbody = {
-    titulo: titulo,
-    cuerpo: cuerpo,
-    autor: autor
+
+  const [selection, setSelection] = React.useState('Post');
+
+  const handleLangChange = (event) => {
+    setSelection(event.target.value)
   }
 
-  const handlePost = async () => {
-    navigate("/")
-    console.log(props.comunityCode)
-    console.log(JSON.stringify({ titulo: titulo, cuerpo: cuerpo, autor: autor }));
-    const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formbody),
-
-    });
+  const viewObject = () => {
+    switch (selection) {
+      case "Votation":
+        return <Create_Votation autor={autor} comunityCode={props.comunityCode} ></Create_Votation>
+      case "Post":
+        return <Create_Post autor={autor} comunityCode={props.comunityCode} ></Create_Post>
+      case "Meeting":
+        return <Create_Meeting comunityCode={props.comunityCode} ></Create_Meeting>
+    }
   }
 
-  const formBodyVot = {
-    titulo: tituloVot,
-    opcionA: opcionA,
-    opcionB: opcionB,
-    autor: autor
-  }
-  const handlePostVot = async () => {
-    navigate("/")
-    console.log(props.comunityCode)
-    console.log(JSON.stringify({ titulo: titulo, cuerpo: cuerpo, autor: autor }));
-    const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/votacion`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formBodyVot),
 
-    });
 
-  }
-  return (
-    props.rol==0 ? (
-    
-    <div className="container">
-      <div className="cont1">
-      <div className='create section__padding'>
-        <div className="create-container">
-          <h1>Crear nuevo Post</h1>
-          <form className='writeForm' autoComplete='off'>
-            <div className="formGroup">
-              <label>Título</label>
-              <input type="text" placeholder='Título del post' autoFocus={true} onChange={handleTitle} required/>
-            </div>
-            <div className="formGroup">
-              <label>Cuerpo</label>
-              <textarea type="text" rows={8} placeholder='Descripción del post' onChange={handleCuerpo} required></textarea>
-            </div>
-            <div className="formGroup">
-              <label>Categoría</label>
-              <select >
-                <option>Instalación</option>
-                <option>Junta de vecinos</option>
-                <option>Mantenimiento</option>
-                <option>Otros</option>
-              </select>
-            </div>
-            <button className='writeButton' onClick={handlePost}>Crear Post</button>
-          </form>
-        </div>
-      </div>
-      </div>
-      <div className="cont2">
-      <div className='create section__padding'>
-        <div className="create-container">
-          <h1>Crear nueva Votación</h1>
-          <form className='writeForm' autoComplete='off'>
-
-            <div className="formGroup">
-              <label>Título</label>
-              <input type="text" placeholder='Título de la votación' autoFocus={true} onChange={handleTituloVot} required/>
-            </div>
-            <div className="formGroup">
-              <label>Opción A</label>
-              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionA} required></textarea>
-            </div>
-            <div className="formGroup">
-              <label>Opción B</label>
-              <textarea type="text" rows={1} placeholder='' onChange={handleOpcionB} required></textarea>
-            </div>
-            <div className="formGroup">
-              <label>Categoría</label>
-              <select >
-                <option>Instalación</option>
-                <option>Junta de vecinos</option>
-                <option>Mantenimiento</option>
-                <option>Otros</option>
-              </select>
-            </div>
-            <button className='writeButton' onClick={handlePostVot}>Crear Votación</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    </div>
-
+  return (props.rol == 0 ?
+    (
+    <>
+      <div className="formGroup">
+        <select value={selection} onChange={handleLangChange}>
+          <option value="Post" > Post </option >
+          <option value="Votation" > Votación </option>
+          <option value="Meeting"> Reunión </option>
+        </select >
+      </div >
+      {viewObject()}
+    </>
     ) : (
-
-      <div className='create section__padding'>
-        <div className="create-container">
-          <h1>Crear nuevo Post</h1>
-          <form className='writeForm' autoComplete='off'>
-
-            <div className="formGroup">
-              <label>Titulo</label>
-              <input type="text" placeholder='Título del post' autoFocus={true} onChange={handleTitle} />
-            </div>
-            <div className="formGroup">
-              <label>Cuerpo</label>
-              <textarea type="text" rows={8} placeholder='Descripción del post' onChange={handleCuerpo}></textarea>
-            </div>
-            <div className="formGroup">
-              <label>Categoría</label>
-              <select >
-                <option>Instalación</option>
-                <option>Junta de vecinos</option>
-                <option>Mantenimiento</option>
-                <option>Otros</option>
-              </select>
-            </div>
-            <button className='writeButton' onClick={handlePost}>Crear Post</button>
-          </form>
-        </div>
-      </div>
+      <>
+      {/* <div className="formGroup">
+        <select value={selection} onChange={handleLangChange}>
+          <option value="Post" > Post </option >
+        </select >
+      </div > */}
+      {viewObject()}
+    </>
     )
+      
+
+
+
   )
 };
 
