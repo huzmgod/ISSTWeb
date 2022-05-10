@@ -37,7 +37,6 @@ const AddComunity = (props) => {
       numero: numero,
       cpostal: cpostal,
       comunityCode: comCode,
-      gestorCode: numAdmin
 
     };
     const res = await fetch(`${URLBACKEND}/comunidad/register`, {
@@ -47,9 +46,7 @@ const AddComunity = (props) => {
       },
       body: JSON.stringify(formbody),
     });
-    if (res.status==200) {
-      navigate("/home/admin");
-    }
+    navigate("/home/admin");
   }
 
   return (

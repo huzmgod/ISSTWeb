@@ -32,6 +32,7 @@ const HomeAdmin = () => {
   const setComunidades = useContext(UserContext).setComunidades;
   const setIsAdmin = useContext(UserContext).setIsAdmin;
   const setNumAdmin = useContext(UserContext).setNumAdmin;
+  const email = useContext(UserContext).email;
 
   useEffect(() => {
     var formBody = sessionStorage.getItem("formBody")
@@ -40,24 +41,23 @@ const HomeAdmin = () => {
       async function fetchData() {
         try {
 
-          const res = await fetch(`${URLBACKEND}/gestor/login?${formBody}`);
-          if (res.status === 200) {
-            const resData = await res.json();
-            console.log(res)
-            if (resData != null) {
-              setIsAdmin(true);
-              setBool(true);
-              setId(resData.id);
-              setNombre(resData.nombre);
-              setApellidos(resData.apellidos);
-              setEmail(resData.email);
-              setPassword(resData.password);
-              setNumAdmin(resData.numAdmin);
-              setComunidades(resData.comunidades);
+          const res = await fetch(`${URLBACKEND}/gestor/${email}`);
+          const resData = await res.json();
+          console.log(res)
+          if (resData != null) {
+            setIsAdmin(true);
+            setBool(true);
+            setId(resData.id);
+            setNombre(resData.nombre);
+            setApellidos(resData.apellidos);
+            setEmail(resData.email);
+            setPassword(resData.password);
+            setNumAdmin(resData.numAdmin);
+            setComunidades(resData.comunidades);
 
-              navigate("/home/admin");
-            }
+            navigate("/home/admin");
           }
+
         } catch (error) {
           return console.error(error);
         }
@@ -71,9 +71,6 @@ const HomeAdmin = () => {
   return (
 
     <div className='home'>
-
-
-
 
       <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
         <Fab color='warning' aria-label="add" onClick={() => navigate("addComunity")}>

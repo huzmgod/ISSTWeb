@@ -23,11 +23,6 @@ const RegisterAdmin = () => {
   const [passwordLog, setPasswordLog] = React.useState('');
   const [numAdminLog, setNumAdminLog] = React.useState('');
 
-
-
-
-
-  const setId = useContext(UserContext).setId;
   const setBoolLogin = useContext(UserContext).setBool;
   const setNumAdminLogin = useContext(UserContext).setNumAdmin;
   const setNombreLogin = useContext(UserContext).setNombre;
@@ -84,8 +79,11 @@ const RegisterAdmin = () => {
 
       const res = await fetch(`${URLBACKEND}/gestor/login?${f}`);
       let gestor = await fetch(`${URLBACKEND}/gestor/${formbody.email}`);
-      console.log(gestor);
-      if (gestor != null) {
+      let gestorData= await gestor.json();
+     
+      
+      console.log(gestorData);
+      if (gestorData != null) {
 
         console.log("nice user")
         sessionStorage.setItem("formBody", f)
@@ -93,12 +91,12 @@ const RegisterAdmin = () => {
 
         setIsAdmin(true);
         setBoolLogin(true);
-        setNombreLogin(gestor.nombre);
-        setApellidosLogin(gestor.apellidos);
-        setEmailLogin(gestor.email);
-        setPasswordLogin(gestor.password);
-        setNumAdminLogin(gestor.numAdmin);
-        setComunidades(gestor.comunidades);
+        setNombreLogin(gestorData.nombre);
+        setApellidosLogin(gestorData.apellidos);
+        setEmailLogin(gestorData.email);
+        setPasswordLogin(gestorData.password);
+        setNumAdminLogin(gestorData.numAdmin);
+        setComunidades(gestorData.comunidades);
         navigate("/home/admin");
       } else {
         alert("Usuario o contraseña incorrectos")
