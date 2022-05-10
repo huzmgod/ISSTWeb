@@ -60,7 +60,7 @@ const RegisterAdmin = () => {
     });
 
     if (res.status === 200) {
-      alert("Usuario creado correctamente")
+      alert("Gestor creado correctamente")
     }
   }
 
@@ -83,130 +83,119 @@ const RegisterAdmin = () => {
       f = f.join("&");
 
       const res = await fetch(`${URLBACKEND}/gestor/login?${f}`);
-      // const res = await fetch(`${URLBACKEND}/gestor/login?`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      //   },
-      //   body: f,
-      // });
-      if (res.status === 200) {
-        const resData = await res.json();
-        console.log(res)
-        if (resData != null) {
-          console.log("nice user")
-          sessionStorage.setItem("formBody", f)
-          sessionStorage.setItem("member", "gestor")
+      let gestor = await fetch(`${URLBACKEND}/gestor/${formbody.email}`);
+      console.log(gestor);
+      if (gestor != null) {
 
-          setIsAdmin(true);
-          setBoolLogin(true);
-          setId(resData.id);
-          setNombreLogin(resData.nombre);
-          setApellidosLogin(resData.apellidos);
-          setEmailLogin(resData.email);
-          setPasswordLogin(resData.password);
-          setNumAdminLogin(resData.numAdmin);
-          setComunidades(resData.comunidades);
+        console.log("nice user")
+        sessionStorage.setItem("formBody", f)
+        sessionStorage.setItem("member", "gestor")
 
-          navigate("/home/admin");
-        } else {
-          alert("Usuario o contraseña incorrectos")
-        }
+        setIsAdmin(true);
+        setBoolLogin(true);
+        setNombreLogin(gestor.nombre);
+        setApellidosLogin(gestor.apellidos);
+        setEmailLogin(gestor.email);
+        setPasswordLogin(gestor.password);
+        setNumAdminLogin(gestor.numAdmin);
+        setComunidades(gestor.comunidades);
+        navigate("/home/admin");
+      } else {
+        alert("Usuario o contraseña incorrectos")
       }
-
     } catch (error) {
-      console.log(error)
-    }
+    console.log(error)
   }
+}
 
-  // REGISTER FIELDS
+// REGISTER FIELDS
 
-  function handleChangeNombre(event) {
-    setNombre(event.target.value);
-  }
-  function handleChangeApellidos(event) {
-    setApellidos(event.target.value);
-  }
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
-  }
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
-  }
+function handleChangeNombre(event) {
+  setNombre(event.target.value);
+}
+function handleChangeApellidos(event) {
+  setApellidos(event.target.value);
+}
+function handleChangeEmail(event) {
+  setEmail(event.target.value);
+}
+function handleChangePassword(event) {
+  setPassword(event.target.value);
+}
 
-  function handleChangeNumAdmin(event) {
-    setNumAdmin(event.target.value);
-  }
+function handleChangeNumAdmin(event) {
+  setNumAdmin(event.target.value);
+}
 
-  // LOGIN FIELDS
-  function handleChangeEmailLogin(event) {
-    setEmailLog(event.target.value);
-  }
-  function handleChangePasswordLogin(event) {
-    setPasswordLog(event.target.value);
-  }
+// LOGIN FIELDS
+function handleChangeEmailLogin(event) {
+  setEmailLog(event.target.value);
+}
+function handleChangePasswordLogin(event) {
+  setPasswordLog(event.target.value);
+}
 
-  function handleChangeNumAdminLogin(event) {
-    setNumAdminLog(event.target.value);
-  }
+function handleChangeNumAdminLogin(event) {
+  setNumAdminLog(event.target.value);
+}
 
-  return (
-    <div className='register section__padding'>
-      <div className="register-container">
-        <h1>registro gestor</h1>
-        <form className='register-writeForm' autoComplete='off' >
-          <div className="register-formGroup">
-            <label>Nombre</label>
-            <input type="text" placeholder='Nombre' onChange={handleChangeNombre} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Apellidos</label>
-            <input type="text" placeholder='Apellidos' onChange={handleChangeApellidos} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Email</label>
-            <input type="email" placeholder='Email' onChange={handleChangeEmail} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Contraseña</label>
-            <input type="text" placeholder='Password' onChange={handleChangePassword} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Número de administrador</label>
-            <input type="text" placeholder='Nº Admin' onChange={handleChangeNumAdmin} required />
-          </div>
-          <div className="register-button">
-            <button className='register-writeButton' onClick={handleRegister}>Register</button>
-          </div>
+return (
+  <div className='register section__padding'>
+    <div className="register-container">
+      <h1>registro gestor</h1>
+      <form className='register-writeForm' autoComplete='off' >
+        <div className="register-formGroup">
+          <label>Nombre</label>
+          <input type="text" placeholder='Nombre' onChange={handleChangeNombre} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Apellidos</label>
+          <input type="text" placeholder='Apellidos' onChange={handleChangeApellidos} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Email</label>
+          <input type="email" placeholder='Email' onChange={handleChangeEmail} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Contraseña</label>
+          <input type="text" placeholder='Password' onChange={handleChangePassword} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Número de administrador</label>
+          <input type="text" placeholder='Nº Admin' onChange={handleChangeNumAdmin} required />
+        </div>
+        <div className="register-button">
+          <button className='register-writeButton' onClick={handleRegister}>Register</button>
+        </div>
 
-        </form>
-
-      </div>
-      <div className="register-container">
-        <h1>Login gestor</h1>
-        <form className='register-writeForm' autoComplete='off' >
-          <div className="register-formGroup">
-            <label>Email</label>
-            <input type="email" placeholder='Email' onChange={handleChangeEmailLogin} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Número de administrador</label>
-            <input type="text" placeholder='Nº Admin' onChange={handleChangeNumAdminLogin} required />
-          </div>
-          <div className="register-formGroup">
-            <label>Contraseña</label>
-            <input type="text" placeholder='Password' onChange={handleChangePasswordLogin} required />
-          </div>
-          <div className="register-button">
-            <button className='reg-login-writeButton' onClick={handleLogin}>Login</button>
-          </div>
-
-        </form>
-
-      </div>
+      </form>
 
     </div>
-  )
+    <div className="register-container">
+      <h1>Login gestor</h1>
+      <form className='register-writeForm' autoComplete='off' >
+        <div className="register-formGroup">
+          <label>Email</label>
+          <input type="email" placeholder='Email' onChange={handleChangeEmailLogin} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Número de administrador</label>
+          <input type="text" placeholder='Nº Admin' onChange={handleChangeNumAdminLogin} required />
+        </div>
+        <div className="register-formGroup">
+          <label>Contraseña</label>
+          <input type="text" placeholder='Password' onChange={handleChangePasswordLogin} required />
+        </div>
+        <div className="register-button">
+          <button className='reg-login-writeButton' onClick={handleLogin}>Login</button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+)
 };
 
 export default RegisterAdmin;
