@@ -31,19 +31,15 @@ const AddComunity = (props) => {
   }
 
   const handleNewComunity = async () => {
-   const formbody = {
+    const formbody = {
       gestorCode: numAdmin,
       calle: calle,
       numero: numero,
       cpostal: cpostal,
-      comCode: comCode,
-      posts: [],
-      votaciones: [],
-      instalaciones: [],
-      reuniones: []
+      comunityCode: comCode,
+      gestorCode: numAdmin
 
     };
-  
     const res = await fetch(`${URLBACKEND}/comunidad/register`, {
       method: "POST",
       headers: {
@@ -51,9 +47,8 @@ const AddComunity = (props) => {
       },
       body: JSON.stringify(formbody),
     });
-    alert(res)
-    if(res == "Comunidad registrada con éxito"){
-      navigate("/home/admin");    
+    if (res.status==200) {
+      navigate("/home/admin");
     }
   }
 
