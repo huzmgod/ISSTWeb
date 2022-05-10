@@ -16,7 +16,7 @@ const Register = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [piso, setPiso] = React.useState('');
-  const [comunidad, setComunidad] = React.useState('');
+  const [comunidades, setComunidades] = React.useState([]);
 
   const handleRegister = async () => {
 
@@ -26,7 +26,7 @@ const Register = () => {
       email: utf8.encode(email),
       password: password,
       piso: piso,
-      comunidades: [comunidad]
+      comunidades: comunidades
     };
     console.log(formbody)
     // const comFormBody = {
@@ -68,8 +68,8 @@ const Register = () => {
   function handleChangePiso(event) {
     setPiso(event.target.value);
   }
-  function handleChangeComunidad(event) {
-    setComunidad(event.target.value);
+  function handleChangeComunidades(event) {
+    setComunidades((event.target.value).split(", "));
   }
 
   return (
@@ -99,7 +99,7 @@ const Register = () => {
           </div>
           <div className="register-formGroup">
             <label>Comunidad</label>
-            <input type="text" placeholder='Código de tu Comunidad' onChange={handleChangeComunidad} required />
+            <input type="text" placeholder='Código de tu Comunidad' onChange={handleChangeComunidades} required />
           </div>
           <div className="register-button">
             <button className='register-writeButton' onClick={handleRegister}>Register</button>
