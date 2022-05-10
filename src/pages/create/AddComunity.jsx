@@ -39,7 +39,7 @@ const AddComunity = (props) => {
       comunityCode: comCode,
 
     };
-    const res = await fetch(`${URLBACKEND}/comunidad/register`, {
+    const res = await fetch(`${URLBACKEND}/comunidad/register/${numAdmin}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
