@@ -20,35 +20,69 @@ const HomeAdmin = () => {
   const navigate = useNavigate();
 
 
- 
 
-
+  const setBool = useContext(UserContext).setBool;
   const setId = useContext(UserContext).setId;
   const setNombre = useContext(UserContext).setNombre;
   const setApellidos = useContext(UserContext).setApellidos;
   const setEmail = useContext(UserContext).setEmail;
   const setPassword = useContext(UserContext).setPassword;
-  const setNumAdmin = useContext(UserContext).setNumAdmin;
+  const setPiso = useContext(UserContext).setPiso;
+  const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
- 
+  const setIsAdmin = useContext(UserContext).setIsAdmin;
+  const setNumAdmin = useContext(UserContext).setNumAdmin;
 
-  
+  useEffect(() => {
+    var formBody = sessionStorage.getItem("formBody")
+
+    if (formBody != null) {
+      async function fetchData() {
+        try {
+
+          const res = await fetch(`${URLBACKEND}/gestor/login?${formBody}`);
+          if (res.status === 200) {
+            const resData = await res.json();
+            console.log(res)
+            if (resData != null) {
+              setIsAdmin(true);
+              setBool(true);
+              setId(resData.id);
+              setNombre(resData.nombre);
+              setApellidos(resData.apellidos);
+              setEmail(resData.email);
+              setPassword(resData.password);
+              setNumAdmin(resData.numAdmin);
+              setComunidades(resData.comunidades);
+
+              navigate("/home/admin");
+            }
+          }
+        } catch (error) {
+          return console.error(error);
+        }
+      }
+      fetchData();
+    }
+  }, [])
+
+
 
   return (
-    
-      <div className='home'>
-        
 
-        
-        
-        <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
-          <Fab color='warning' aria-label="add" onClick={() => navigate("addComunity")}>
-            <AddIcon />
-          </Fab>
-        </Box>
+    <div className='home'>
 
-      </div>
-    
+
+
+
+      <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
+        <Fab color='warning' aria-label="add" onClick={() => navigate("addComunity")}>
+          <AddIcon />
+        </Fab>
+      </Box>
+
+    </div>
+
 
   );
 };

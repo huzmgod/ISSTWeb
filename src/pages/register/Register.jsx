@@ -19,20 +19,22 @@ const Register = () => {
   const [comunidad, setComunidad] = React.useState('');
 
   const handleRegister = async () => {
+
     const formbody = {
       nombre: nombre,
-      apellidos: apellidos.split(' '),
+      apellidos: apellidos,
       email: utf8.encode(email),
       password: password,
       piso: piso,
+      comunidades: [comunidad]
     };
     console.log(formbody)
-    const comFormBody = {
-      comunitycode: comunidad,
-      email: formbody.email,
-      password: formbody.password,
-    };
-
+    // const comFormBody = {
+    //   email: formbody.email,
+    //   password: formbody.password,
+    //   comunitycode: comunidad,
+    // };
+    // console.log(comFormBody)
     const res = await fetch(`${URLBACKEND}/usuario/register`, {
       method: "POST",
       headers: {
@@ -40,13 +42,13 @@ const Register = () => {
       },
       body: JSON.stringify(formbody),
     });
-    const comunityRes = await fetch(`${URLBACKEND}/usuario/comunidad`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(comFormBody),
-    });
+    // const comunityRes = await fetch(`${URLBACKEND}/usuario/comunidad`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(comFormBody),
+    // });
     navigate("/login");
   }
 

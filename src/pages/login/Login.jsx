@@ -111,13 +111,16 @@ export const Login = () => {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-      const res = await fetch(`${URLBACKEND}/usuario/login?`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-        body: formBody,
-      });
+
+      const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
+      
+      // const res = await fetch(`${URLBACKEND}/usuario/login?`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      //   },
+      //   body: formBody,
+      // });
       // const res = await fetch(`${URLBACKEND}/gestor/login?`, {
       //   method: "POST",
       //   headers: {
@@ -133,7 +136,8 @@ export const Login = () => {
         if (resData != null) {
           console.log("nice user")
           sessionStorage.setItem("formBody", formBody)
-
+          sessionStorage.setItem("member", "persona")
+          console.log(resData);
           setBool(true);
           setId(resData.id);
           setNombre(resData.nombre);
@@ -143,10 +147,11 @@ export const Login = () => {
           setPiso(resData.piso);
           setRol(resData.rol);
           setComunidades(resData.comunidades);
-          
+          console.log(resData.comunidades[0]);
           const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
           console.log(comunityData)
           const comunity = await comunityData.json();
+          console.log(comunityData);
           setIdCom(comunity.id);
           setCalle(comunity.calle);
           setNumero(comunity.numero);

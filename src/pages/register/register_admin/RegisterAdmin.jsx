@@ -19,6 +19,14 @@ const RegisterAdmin = () => {
   const [password, setPassword] = useState('');
   const [numAdmin, setNumAdmin] = useState('');
 
+  const [emailLog, setEmailLog] = React.useState('');
+  const [passwordLog, setPasswordLog] = React.useState('');
+  const [numAdminLog, setNumAdminLog] = React.useState('');
+
+
+
+
+
   const setId = useContext(UserContext).setId;
   const setBoolLogin = useContext(UserContext).setBool;
   const setNumAdminLogin = useContext(UserContext).setNumAdmin;
@@ -29,16 +37,14 @@ const RegisterAdmin = () => {
   const setComunidades = useContext(UserContext).setComunidades;
 
 
-  const [emailLog, setEmailLog] = React.useState('');
-  const [passwordLog, setPasswordLog] = React.useState('');
-  const [numAdminLog, setNumAdminLog] = React.useState('');
+
 
   const setIsAdmin = React.useContext(UserContext).setIsAdmin;
 
   const handleRegister = async () => {
     const formbody = {
       nombre: nombre,
-      apellidos: apellidos.split(' '),
+      apellidos: apellidos,
       email: utf8.encode(email),
       password: password,
       numAdmin: numAdmin,
@@ -75,19 +81,22 @@ const RegisterAdmin = () => {
         f.push(encodedKey + "=" + encodedValue);
       }
       f = f.join("&");
-      const res = await fetch(`${URLBACKEND}/gestor/login?`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-        body: f,
-      });
+
+      const res = await fetch(`${URLBACKEND}/gestor/login?${f}`);
+      // const res = await fetch(`${URLBACKEND}/gestor/login?`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      //   },
+      //   body: f,
+      // });
       if (res.status === 200) {
         const resData = await res.json();
         console.log(res)
         if (resData != null) {
           console.log("nice user")
           sessionStorage.setItem("formBody", f)
+          sessionStorage.setItem("member", "gestor")
 
           setIsAdmin(true);
           setBoolLogin(true);

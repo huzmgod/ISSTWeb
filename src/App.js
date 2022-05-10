@@ -6,6 +6,7 @@ import RouteConfig from './RouteConfig';
 import ComunityContext from './components/ComunityContext';
 import { URLBACKEND } from './constants/constants';
 
+
 function App() {
   const [numAdmin, setNumAdmin] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -31,45 +32,64 @@ function App() {
 
   useEffect(() => {
     var formBody = sessionStorage.getItem("formBody")
+    var member = sessionStorage.getItem("member")
     if (formBody != null) {
       async function fetchData() {
         try {
+          if (member == "persona") {
+            const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
+            // const res = await fetch(`${URLBACKEND}/usuario/login?`, {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            //   },
+            //   body: formBody,
+            // });
+            if (res.status === 200) {
+              const resData = await res.json();
+              if (resData != null) {
 
-          const res = await fetch(`${URLBACKEND}/usuario/login?`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-            },
-            body: formBody,
-          });
-          console.log(res)
-          if (res.status === 200) {
-            const resData = await res.json();
-            console.log(res)
-            if (resData != null) {
 
+                setBool(true);
+                setId(resData.id);
+                setNombre(resData.nombre);
+                setApellidos(resData.apellidos);
+                setEmail(resData.email);
+                setPassword(resData.password);
+                setPiso(resData.piso);
+                setRol(resData.rol);
+                setComunidades(resData.comunidades);
 
-              setBool(true);
-              setId(resData.id);
-              setNombre(resData.nombre);
-              setApellidos(resData.apellidos);
-              setEmail(resData.email);
-              setPassword(resData.password);
-              setPiso(resData.piso);
-              setRol(resData.rol);
-              setComunidades(resData.comunidades);
+                const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+                console.log(comunityData)
+                const comunity = await comunityData.json();
+                console.log(comunity)
+                setIdCom(comunity.id);
+                setCalle(comunity.calle);
+                setNumero(comunity.numero);
+                setCpostal(comunity.cpostal);
+                setComunityCode(comunity.comunityCode);
+                setPosts(comunity.posts);
+                setVotaciones(comunity.votaciones);
+                setInstalaciones(comunity.instalaciones);
+              }
+            }
+          } else {
+            const res = await fetch(`${URLBACKEND}/gestor/login?${formBody}`);
+            if (res.status === 200) {
+              const resData = await res.json();
+              if (resData != null) {
+                setIsAdmin(true);
+                setBool(true);
+                setId(resData.id);
+                setNombre(resData.nombre);
+                setApellidos(resData.apellidos);
+                setEmail(resData.email);
+                setPassword(resData.password);
+                setNumAdmin(resData.numAdmin);
+                setComunidades(resData.comunidades);
 
-              const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
-              const comunity = await comunityData.json();
-              setIdCom(comunity.id);
-              setCalle(comunity.calle);
-              setNumero(comunity.numero);
-              setCpostal(comunity.cpostal);
-              setComunityCode(comunity.comunityCode);
-              setPosts(comunity.posts);
-              setVotaciones(comunity.votaciones);
-              setInstalaciones(comunity.instalaciones);
-              setReuniones(comunity.reuniones);
+              }
             }
           }
         } catch (error) {

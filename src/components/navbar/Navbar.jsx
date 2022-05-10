@@ -21,6 +21,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setBool(false);
     sessionStorage.removeItem("formBody");
+    sessionStorage.removeItem("member");
   }
 
   return (

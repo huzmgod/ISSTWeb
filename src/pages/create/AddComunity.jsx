@@ -36,7 +36,11 @@ const AddComunity = (props) => {
       calle: calle,
       numero: numero,
       cpostal: cpostal,
-      comCode: comCode
+      comCode: comCode,
+      posts: [],
+      votaciones: [],
+      instalaciones: [],
+      reuniones: []
 
     };
   

@@ -88,47 +88,47 @@ const Home = () => {
     }
     return items;
   }
-//TODO
-  const forumMeets = () => {
-    let items = [];
-    for (let i = 0; i < reuniones.length; i++) {
-      items.push(
-        <Box className="addVotation" >
-          <Box className='description' >
-            <CardVotations
-              comunityCode={comunityCode}
-              key={i}
-              id={votaciones[i].id}
-              idLocal={idLocal}
-              titulo={votaciones[i].titulo}
-              autor={votaciones[i].autor.nombre}
-              autorId={votaciones[i].autor.id}
-              opcionA={votaciones[i].opcionA}
-              opcionB={votaciones[i].opcionB}
-              votantesA={votaciones[i].votantesA}
-              votantesB={votaciones[i].votantesB}
-              f5={f5}
-              setF5={setF5}
-            />
-            <Box className='checkBoxes'>
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                >
-                  <FormControlLabel value={votaciones[i].opcionA} control={<Radio />} label={votaciones[i].opcionA} />
-                  <FormControlLabel value={votaciones[i].opcionB} control={<Radio />} label={votaciones[i].opcionB} />
-                  <FormControlLabel value="NS/NC" control={<Radio />} label="NS/NC" />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-          </Box>
-        </Box>
-      )
-    }
-    return items;
-  }
+  // //TODO
+  //   const forumMeets = () => {
+  //     let items = [];
+  //     for (let i = 0; i < reuniones.length; i++) {
+  //       items.push(
+  //         <Box className="addVotation" >
+  //           <Box className='description' >
+  //             <CardVotations
+  //               comunityCode={comunityCode}
+  //               key={i}
+  //               id={votaciones[i].id}
+  //               idLocal={idLocal}
+  //               titulo={votaciones[i].titulo}
+  //               autor={votaciones[i].autor.nombre}
+  //               autorId={votaciones[i].autor.id}
+  //               opcionA={votaciones[i].opcionA}
+  //               opcionB={votaciones[i].opcionB}
+  //               votantesA={votaciones[i].votantesA}
+  //               votantesB={votaciones[i].votantesB}
+  //               f5={f5}
+  //               setF5={setF5}
+  //             />
+  //             <Box className='checkBoxes'>
+  //               <FormControl>
+  //                 <RadioGroup
+  //                   row
+  //                   aria-labelledby="demo-row-radio-buttons-group-label"
+  //                   name="row-radio-buttons-group"
+  //                 >
+  //                   <FormControlLabel value={votaciones[i].opcionA} control={<Radio />} label={votaciones[i].opcionA} />
+  //                   <FormControlLabel value={votaciones[i].opcionB} control={<Radio />} label={votaciones[i].opcionB} />
+  //                   <FormControlLabel value="NS/NC" control={<Radio />} label="NS/NC" />
+  //                 </RadioGroup>
+  //               </FormControl>
+  //             </Box>
+  //           </Box>
+  //         </Box>
+  //       )
+  //     }
+  //     return items;
+  //   }
   const setBool = useContext(UserContext).setBool;
   const setId = useContext(UserContext).setId;
   const setNombre = useContext(UserContext).setNombre;
@@ -138,6 +138,10 @@ const Home = () => {
   const setPiso = useContext(UserContext).setPiso;
   const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
+  const setIsAdmin = useContext(UserContext).setIsAdmin;
+  const setNumAdmin = useContext(UserContext).setNumAdmin;
+
+
   const setIdCom = useContext(ComunityContext).setIdCom;
   const setCalle = useContext(ComunityContext).setCalle;
   const setNumero = useContext(ComunityContext).setNumero;
@@ -149,44 +153,65 @@ const Home = () => {
 
   useEffect(() => {
     var formBody = sessionStorage.getItem("formBody")
+    var member = sessionStorage.getItem("member")
     if (formBody != null) {
       async function fetchData() {
         try {
+          if (member == "persona") {
+            const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
+            // const res = await fetch(`${URLBACKEND}/usuario/login?`, {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            //   },
+            //   body: formBody,
+            // });
+            if (res.status === 200) {
+              const resData = await res.json();
+              if (resData != null) {
 
-          const res = await fetch(`${URLBACKEND}/usuario/login?`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-            },
-            body: formBody,
-          });
-          console.log(res)
-          if (res.status === 200) {
-            const resData = await res.json();
-            console.log(res)
-            if (resData != null) {
 
+                setBool(true);
+                setId(resData.id);
+                setNombre(resData.nombre);
+                setApellidos(resData.apellidos);
+                setEmail(resData.email);
+                setPassword(resData.password);
+                setPiso(resData.piso);
+                setRol(resData.rol);
+                setComunidades(resData.comunidades);
 
-              setBool(true);
-              setId(resData.id);
-              setNombre(resData.nombre);
-              setApellidos(resData.apellidos);
-              setEmail(resData.email);
-              setPassword(resData.password);
-              setPiso(resData.piso);
-              setRol(resData.rol);
-              setComunidades(resData.comunidades);
+                const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+                const comunity = await comunityData.json();
+                
+                setIdCom(comunity.id);
+                setCalle(comunity.calle);
+                setNumero(comunity.numero);
+                setCpostal(comunity.cpostal);
+                setComunityCode(comunity.comunityCode);
+                setPosts(comunity.posts);
+                setVotaciones(comunity.votaciones);
+                setInstalaciones(comunity.instalaciones);
+              }
+            }
+          } else {
+            const res = await fetch(`${URLBACKEND}/gestor/login?${formBody}`);
+            if (res.status === 200) {
+              const resData = await res.json();
+              console.log(res)
+              if (resData != null) {
+                setIsAdmin(true);
+                setBool(true);
+                setId(resData.id);
+                setNombre(resData.nombre);
+                setApellidos(resData.apellidos);
+                setEmail(resData.email);
+                setPassword(resData.password);
+                setNumAdmin(resData.numAdmin);
+                setComunidades(resData.comunidades);
 
-              const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
-              const comunity = await comunityData.json();
-              setIdCom(comunity.id);
-              setCalle(comunity.calle);
-              setNumero(comunity.numero);
-              setCpostal(comunity.cpostal);
-              setComunityCode(comunity.comunityCode);
-              setPosts(comunity.posts);
-              setVotaciones(comunity.votaciones);
-              setInstalaciones(comunity.instalaciones);
+                navigate("/home/admin");
+              }
             }
           }
         } catch (error) {
