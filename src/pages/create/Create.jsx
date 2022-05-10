@@ -50,8 +50,9 @@ const Create = (props) => {
           <option value="Votation" > Votación </option>
           <option value="Meeting"> Reunión </option>
         </select >
+        {viewObject()}
       </div >
-      {viewObject()}
+      
     </>
     ) : (
       <>
