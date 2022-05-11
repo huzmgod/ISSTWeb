@@ -83,12 +83,12 @@ function App() {
                 setPassword(resData.password);
                 setNumAdmin(resData.numAdmin);
                 setComunidades(resData.comunidades);
-
-              }
-            }
+              }}
+            
+            
           }
         } catch (error) {
-          return console.error(error);
+          return ;
         }
       }
       fetchData();
@@ -160,7 +160,7 @@ function App() {
       <UserContext.Provider value={{
         numAdmin: numAdmin,
         setNumAdmin: setNumAdmin,
-        isAdmin: bool,
+        isAdmin: isAdmin,
         setIsAdmin: setIsAdmin,
         bool: bool,
         setBool: setBool,

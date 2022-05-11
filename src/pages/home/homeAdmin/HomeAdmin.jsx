@@ -73,7 +73,7 @@ const HomeAdmin = () => {
     <div className='home'>
 
       <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
-        <Fab color='warning' aria-label="add" onClick={() => navigate("addComunity")}>
+        <Fab color='warning' aria-label="add" onClick={() => navigate("/home/admin/addComunity")}>
           <AddIcon />
         </Fab>
       </Box>

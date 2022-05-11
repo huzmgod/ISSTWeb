@@ -156,20 +156,20 @@ const Home = () => {
     bool ? (
       <div className='home'>
         <div className='forum'>
-          <h2>POSTS</h2>
+          {/* <h2>POSTS</h2> */}
           {forumCards()}
 
         </div>
         <div className='votations'>
-          <h2>VOTACIONES</h2>
+          {/* <h2>VOTACIONES</h2> */}
           {forumVotes()}
 
         </div>
-        <div className='votations'>
+        {/* <div className='votations'>
           <h2>REUNIONES</h2>
           {forumMeets()}
 
-        </div>
+        </div> */}
         {/* <Header /> */}
         {/* <Bids title="Instalaciones"  /> */}
         <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>

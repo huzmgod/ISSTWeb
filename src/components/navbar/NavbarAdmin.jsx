@@ -14,10 +14,13 @@ const Menu = () => (
 const NavbarAdmin = () => {
   const bool = useContext(UserContext).bool;
   const setBool = useContext(UserContext).setBool;
+  const setIsAdmin = useContext(UserContext).setIsAdmin;
   const [toggleMenu, setToggleMenu] = useState(false)
 
   const handleLogout = () => {
     setBool(false);
+    setIsAdmin(false);
+
     sessionStorage.removeItem("formBody");
     sessionStorage.removeItem("member");
   }

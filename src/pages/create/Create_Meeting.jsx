@@ -10,26 +10,32 @@ const Create_Meeting = (props) => {
     const navigate = useNavigate();
     const [motivo, setMotivo] = useState("");
     const [fecha, setFecha] = useState("");
+    const [hora, setHora] = useState("");
     const [presencial, setPresencial] = useState(Boolean(true));
-    const [localizacion, setLocizacion] = useState("");
+    const [localizacion, setLocalizacion] = useState("");
 
     const handleMotivo = (event) => {
         setMotivo(event.target.value);
     }
     const handleFecha = (event) => {
         setFecha(event.target.value);
+        
+    }
+    const handleHora= (event) => {
+        setHora(event.target.value);
+        console.log(hora);
     }
     const handlePresencial = (event) => {
         const valor = JSON.parse(event.target.value);
         setPresencial(valor);
     }
     const handleLocalizacion = (event) => {
-        setLocizacion(event.target.value);
+        setLocalizacion(event.target.value);
     }
 
     const formBodyMeet = {
         motivo: motivo,
-        fecha: fecha,
+        fecha: `${fecha}, ${hora}`,
         presencial: presencial,
         localizacion: localizacion,
         comunityCode:props.comunityCode
@@ -63,6 +69,10 @@ const Create_Meeting = (props) => {
                         <div className="formGroup">
                             <label>Fecha</label>
                             <input type="date" placeholder='Fecha de la reunión' onChange={handleFecha} required></input>
+                        </div>
+                        <div className="formGroup">
+                            <label>Hora</label>
+                            <input type="time" placeholder='Hora de la reunión' onChange={handleHora} required ></input>
                         </div>
                         <div className="formGroup">
                             <label>¿Es presencial?</label>

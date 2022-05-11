@@ -53,11 +53,8 @@ export const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
-<<<<<<< HEAD
-=======
   const utf8 = require('utf8');
   // const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
->>>>>>> origin/gonsi
 
 
   const LoginSchema = Yup.object().shape({

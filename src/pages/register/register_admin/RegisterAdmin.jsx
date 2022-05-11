@@ -78,25 +78,21 @@ const RegisterAdmin = () => {
       f = f.join("&");
 
       const res = await fetch(`${URLBACKEND}/gestor/login?${f}`);
-      let gestor = await fetch(`${URLBACKEND}/gestor/${formbody.email}`);
-      let gestorData= await gestor.json();
-     
-      
-      console.log(gestorData);
-      if (gestorData != null) {
+      if (res.status === 200) {
+        const resData = await res.json();
 
-        console.log("nice user")
+        console.log(resData);
         sessionStorage.setItem("formBody", f)
         sessionStorage.setItem("member", "gestor")
 
         setIsAdmin(true);
         setBoolLogin(true);
-        setNombreLogin(gestorData.nombre);
-        setApellidosLogin(gestorData.apellidos);
-        setEmailLogin(gestorData.email);
-        setPasswordLogin(gestorData.password);
-        setNumAdminLogin(gestorData.numAdmin);
-        setComunidades(gestorData.comunidades);
+        setNombreLogin(resData.nombre);
+        setApellidosLogin(resData.apellidos);
+        setEmailLogin(resData.email);
+        setPasswordLogin(resData.password);
+        setNumAdminLogin(resData.numAdmin);
+        setComunidades(resData.comunidades);
         navigate("/home/admin");
       } else {
         alert("Usuario o contraseña incorrectos")

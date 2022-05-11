@@ -37,15 +37,15 @@ const AddComunity = (props) => {
       numero: numero,
       cpostal: cpostal,
       comunityCode: comCode,
-
     };
-    const res = await fetch(`${URLBACKEND}/comunidad/register/${numAdmin}`, {
+    const res = await fetch(`${URLBACKEND}/comunidad/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formbody),
     });
+    console.log("hola");
     navigate("/home/admin");
   }
 
@@ -59,7 +59,7 @@ const AddComunity = (props) => {
             <form className='writeForm' autoComplete='off'>
               <div className="formGroup">
                 <label>Código de gestor</label>
-                <input type="text" value={numAdmin} autoFocus={true} />
+                <input type="text" value={numAdmin} autoFocus={true} readOnly/>
               </div>
               <div className="formGroup">
                 <label>Calle</label>

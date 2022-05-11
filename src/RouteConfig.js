@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Navbar} from './components'
+import { Navbar } from './components'
 import { Home, Profile, Item, Create, Login, Register } from './pages'
 import {
     BrowserRouter as Router,
@@ -14,8 +14,10 @@ import AddComunity from './pages/create/AddComunity';
 import { useContext } from 'react';
 import UserContext from './components/UserContext';
 import ComunityContext from './components/ComunityContext';
+import NavbarAdmin from './components/navbar/NavbarAdmin';
 
 export default function RouteConfig() {
+    const isAdmin = useContext(UserContext).isAdmin;
     const numAdmin = useContext(UserContext).numAdmin;
     const bool = useContext(UserContext).bool;
     const id = useContext(UserContext).id;
@@ -34,7 +36,7 @@ export default function RouteConfig() {
     const posts = useContext(ComunityContext).posts;
     // const votaciones = useContext(ComunityContext).votaciones;
     const instalaciones = useContext(ComunityContext).instalaciones;
-
+    console.log(isAdmin);
 
     const routes = [
         {
@@ -73,22 +75,22 @@ export default function RouteConfig() {
         },
         {
             path: "instalaciones/:nombre/:id",
-            element: <Item 
-            instalaciones = {instalaciones}
+            element: <Item
+                instalaciones={instalaciones}
             />
         },
         {
-            path : "/registerAdmin",
-            element : <RegisterAdmin/>
+            path: "/registerAdmin",
+            element: <RegisterAdmin />
 
         },
         {
-            path : "/home/admin",
-            element: <HomeAdmin/>
+            path: "/home/admin",
+            element: <HomeAdmin />
         },
         {
-            path : "home/admin/addComunity",
-            element : <AddComunity
+            path: "/home/admin/addComunity",
+            element: <AddComunity
                 id={id}
                 nombre={nombre}
                 apellidos={apellidos}
@@ -96,16 +98,21 @@ export default function RouteConfig() {
                 password={password}
                 numAdmin={numAdmin}
                 comunidades={comunidades}
-                />
+            />
         },
-        
+
 
     ];
 
     return (
         <Router>
             <>
-                <Navbar />
+                {isAdmin == true ?
+
+                    <NavbarAdmin /> : (
+                        <Navbar />
+                    )
+                }
                 <Routes>
                     {routes.map((route, i) => (
                         <Route key={i} {...route} />
