@@ -133,3 +133,7 @@
   height: 100%;
   background: var(--color-footer);
 }
+
+.selectPP {
+  font-family: var(--font-family);
+}
