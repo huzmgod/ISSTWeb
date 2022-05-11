@@ -15,11 +15,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { URLBACKEND } from '../../../constants/constants';
+import CardCommunity from '../../../components/CardForum/CardCommunity';
 
 const HomeAdmin = () => {
   const navigate = useNavigate();
-
-
 
   const setBool = useContext(UserContext).setBool;
   const setId = useContext(UserContext).setId;
@@ -34,16 +33,17 @@ const HomeAdmin = () => {
   const setNumAdmin = useContext(UserContext).setNumAdmin;
   const email = useContext(UserContext).email;
 
+  const [com, setCom] = React.useState([])
+
   useEffect(() => {
     var formBody = sessionStorage.getItem("formBody")
-
     if (formBody != null) {
       async function fetchData() {
         try {
 
           const res = await fetch(`${URLBACKEND}/gestor/${email}`);
           const resData = await res.json();
-          console.log(res)
+          console.log(resData)
           if (resData != null) {
             setIsAdmin(true);
             setBool(true);
@@ -54,6 +54,7 @@ const HomeAdmin = () => {
             setPassword(resData.password);
             setNumAdmin(resData.numAdmin);
             setComunidades(resData.comunidades);
+            setCom(resData.comunidades);
 
             navigate("/home/admin");
           }
@@ -64,21 +65,43 @@ const HomeAdmin = () => {
       }
       fetchData();
     }
-  }, [])
+  }, [email])
+
+
+  const forumCards = () => {
+    let items = [];
+    console.log(com);
+    for (let i = 0; i < com.length; i++) {
+      if (com[i] != null)
+        items.push(
+          <CardCommunity
+            key={i}
+            comunityCode={com[i]}
+          />
+        )
+    }
+
+    return items;
+  }
 
 
 
   return (
+    <>
+      {forumCards()}
+      <div className='home'>
 
-    <div className='home'>
+        <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
+          <Fab color='warning' aria-label="add" onClick={() => navigate("/home/admin/addComunity")}>
+            <AddIcon />
+          </Fab>
+        </Box>
 
-      <Box className="addComment" sx={{ '& > :not(style)': { m: 1 } }}>
-        <Fab color='warning' aria-label="add" onClick={() => navigate("/home/admin/addComunity")}>
-          <AddIcon />
-        </Fab>
-      </Box>
 
-    </div>
+      </div>
+
+    </>
+
 
 
   );

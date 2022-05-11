@@ -6,15 +6,21 @@ import { URLBACKEND } from '../../constants/constants';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import UserContext from '../../components/UserContext';
+import ComunityContext from '../../components/ComunityContext';
 
 const AddComunity = (props) => {
   const navigate = useNavigate();
 
   const numAdmin = useContext(UserContext).numAdmin;
+  const mail = useContext(UserContext).email;
+  const comunidades = useContext(UserContext).comunidades;
+  const setComunidades = useContext(UserContext).setComunidades;
   const [calle, setCalle] = useState('');
   const [numero, setNumero] = useState('');
   const [cpostal, setCpostal] = useState('');
   const [comCode, setComCode] = useState('');
+
+  const utf8 = require('utf8');
 
   const handleCalle = (event) => {
     setCalle(event.target.value);
@@ -32,7 +38,7 @@ const AddComunity = (props) => {
 
   const handleNewComunity = async () => {
     const formbody = {
-      gestorCode: numAdmin,
+      gestor: numAdmin,
       calle: calle,
       numero: numero,
       cpostal: cpostal,
@@ -45,6 +51,28 @@ const AddComunity = (props) => {
       },
       body: JSON.stringify(formbody),
     });
+
+    const details = {
+      email: mail,
+      comunidad: comCode,
+    };
+
+    let formBody2 = [];
+    for (var property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(utf8.encode(details[property]));
+      formBody2.push(encodedKey + "=" + encodedValue);
+    }
+
+    formBody2 = formBody2.join("&");
+
+    const res2 = await fetch(`${URLBACKEND}/gestor/comunidad?${formBody2}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     console.log("hola");
     navigate("/home/admin");
   }

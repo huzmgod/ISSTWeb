@@ -96,7 +96,7 @@ export default function CardMeet(props) {
                             {props.presencial ? "La reunión será presencial" : "La reunión será online"}
                         </Typography>
 
-                        <Typography color="text.secondary">
+                        <Typography color="text.secondary" fontFamily="PT Sans">
                             {props.presencial ? "Localización" : "URL"}:{props.localizacion}
                         </Typography>
                     </CardContent>

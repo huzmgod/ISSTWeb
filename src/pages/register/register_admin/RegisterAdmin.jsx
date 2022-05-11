@@ -84,12 +84,11 @@ const RegisterAdmin = () => {
         console.log(resData);
         sessionStorage.setItem("formBody", f)
         sessionStorage.setItem("member", "gestor")
-
+        setEmailLogin(resData.email);
         setIsAdmin(true);
         setBoolLogin(true);
         setNombreLogin(resData.nombre);
         setApellidosLogin(resData.apellidos);
-        setEmailLogin(resData.email);
         setPasswordLogin(resData.password);
         setNumAdminLogin(resData.numAdmin);
         setComunidades(resData.comunidades);

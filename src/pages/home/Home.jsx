@@ -84,7 +84,7 @@ const Home = () => {
     }
     return items;
   }
-  //TODO
+
   const forumMeets = () => {
     let items = [];
     for (let i = 0; i < reuniones.length; i++) {
