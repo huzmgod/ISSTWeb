@@ -21,7 +21,6 @@ const Create = (props) => {
     comunidades: props.comunidades
   }
 
-
   const [selection, setSelection] = React.useState('Post');
 
   const handleLangChange = (event) => {

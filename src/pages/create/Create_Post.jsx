@@ -14,7 +14,6 @@ const Create_Post = (props) => {
 
     const handleTitle = (event) => {
         setTitulo(event.target.value);
-        console.log(titulo)
     }
     const handleCuerpo = (event) => {
         setCuerpo(event.target.value);
@@ -23,15 +22,16 @@ const Create_Post = (props) => {
     const formbody = {
         titulo: titulo,
         cuerpo: cuerpo,
-        autor: autor
+        autor: autor.id,
+        comunityCode: props.comunityCode,
+        subPost:[]
     }
 
     const handlePost = async () => {
         if (!(titulo == '' || cuerpo == '')){
             navigate("/")
             console.log(props.comunityCode)
-            console.log(JSON.stringify({ titulo: titulo, cuerpo: cuerpo, autor: autor }));
-            const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post`, {
+            const res = await fetch(`${URLBACKEND}/post/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

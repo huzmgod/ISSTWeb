@@ -47,6 +47,7 @@ export const Login = () => {
   const setPiso = useContext(UserContext).setPiso;
   const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
+  const getIdByMail = useContext(UserContext).getIdByMail;
 
   // const idCom = useContext(ComunityContext).idCom;
   // const calle = useContext(ComunityContext).calle;
@@ -64,6 +65,8 @@ export const Login = () => {
   const setPosts = useContext(ComunityContext).setPosts;
   const setVotaciones = useContext(ComunityContext).setVotaciones;
   const setInstalaciones = useContext(ComunityContext).setInstalaciones;
+  const setReuniones = useContext(ComunityContext).setReuniones;
+  const setGadgets = useContext(ComunityContext).setGadgets;
 
   // const styleClasses = useStyle();
   const [showPassword, setShowPassword] = useState(false);
@@ -113,33 +116,18 @@ export const Login = () => {
       formBody = formBody.join("&");
 
       const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
-      
-      // const res = await fetch(`${URLBACKEND}/usuario/login?`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      //   },
-      //   body: formBody,
-      // });
-      // const res = await fetch(`${URLBACKEND}/gestor/login?`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      //   },
-      //   body: formBody,
-      // });
 
-      console.log(res)
       if (res.status === 200) {
         const resData = await res.json();
-        console.log(res)
+        console.log(resData)
         if (resData != null) {
           console.log("nice user")
           sessionStorage.setItem("formBody", formBody)
           sessionStorage.setItem("member", "persona")
           console.log(resData);
           setBool(true);
-          setId(resData.id);
+          const IdGet = await getIdByMail(resData.email);
+          setId(IdGet);
           setNombre(resData.nombre);
           setApellidos(resData.apellidos);
           setEmail(resData.email);
@@ -148,26 +136,27 @@ export const Login = () => {
           setRol(resData.rol);
           setComunidades(resData.comunidades);
           console.log(resData.comunidades[0]);
+
           const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
-          console.log(comunityData)
           const comunity = await comunityData.json();
-          console.log(comunityData);
           setIdCom(comunity.id);
           setCalle(comunity.calle);
           setNumero(comunity.numero);
           setCpostal(comunity.cpostal);
           setComunityCode(comunity.comunityCode);
-          setPosts(comunity.posts);
-          setVotaciones(comunity.votaciones);
-          setInstalaciones(comunity.instalaciones);
+          setGadgets(comunity.comunityCode)
           navigate("/");
-        }else {
-          alert("Usuario o contraseña incorrectos")
         }
+      } else {
+        alert("Usuario o contraseña incorrectos")
       }
+
     }
   }
   );
+
+
+
 
   const { errors, touched, handleSubmit, getFieldProps } = formik;
   const handleShowPassword = () => {

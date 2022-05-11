@@ -31,15 +31,14 @@ const Create_Meeting = (props) => {
         motivo: motivo,
         fecha: fecha,
         presencial: presencial,
-        localizacion: localizacion
+        localizacion: localizacion,
+        comunityCode:props.comunityCode
     }
 
     const handlePostMeet = async () => {
         if(!(motivo == '' || fecha == '' || localizacion == ''))
         navigate("/")
-        console.log(props.comunityCode)
-        console.log(JSON.stringify({ motivo: motivo, fecha: fecha, presencial: presencial, localizacion: localizacion }));
-        const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/reunion`, {
+        const res = await fetch(`${URLBACKEND}/reunion/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +62,7 @@ const Create_Meeting = (props) => {
                         </div>
                         <div className="formGroup">
                             <label>Fecha</label>
-                            <textarea type="text" rows={1} placeholder='Fecha de la reunión' onChange={handleFecha} required></textarea>
+                            <input type="date" placeholder='Fecha de la reunión' onChange={handleFecha} required></input>
                         </div>
                         <div className="formGroup">
                             <label>¿Es presencial?</label>

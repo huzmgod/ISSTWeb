@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { URLBACKEND } from '../../constants/constants';
 
-export default function CardVotations(props) {
+export default function CardMeet(props) {
 
   const [authorName, setAuthorName] = React.useState("");
 
@@ -35,13 +35,7 @@ export default function CardVotations(props) {
 
       alert("¿Seguro?. Esta acción no se puede deshacer");
 
-      const res = await fetch(`${URLBACKEND}/votacion/delete/${props.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: props.id,
-      });
+      const res = await fetch(`${URLBACKEND}/reunion/delete/${props.id}`);
     } else {
       alert("No puedes borrar una votación que no has creado");
     }
