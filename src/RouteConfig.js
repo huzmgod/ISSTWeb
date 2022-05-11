@@ -76,6 +76,7 @@ export default function RouteConfig() {
         {
             path: "instalaciones/:nombre/:id",
             element: <Item
+                id={id}
                 instalaciones={instalaciones}
             />
         },

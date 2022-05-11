@@ -99,37 +99,42 @@ export const Login = () => {
       formBody = formBody.join("&");
 
       const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
-
+      
       if (res.status === 200) {
         const resData = await res.json();
         console.log(resData)
-        if (resData != null) {
-          console.log("nice user")
-          sessionStorage.setItem("formBody", formBody)
-          sessionStorage.setItem("member", "persona")
-          console.log(resData);
-          setBool(true);
-          const IdGet = await getIdByMail(resData.email);
-          setId(IdGet);
-          setNombre(resData.nombre);
-          setApellidos(resData.apellidos);
-          setEmail(resData.email);
-          setPassword(resData.password);
-          setPiso(resData.piso);
-          setRol(resData.rol);
-          setComunidades(resData.comunidades);
-          console.log(resData.comunidades[0]);
+        
 
-          const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
-          const comunity = await comunityData.json();
-          setIdCom(comunity.id);
-          setCalle(comunity.calle);
-          setNumero(comunity.numero);
-          setCpostal(comunity.cpostal);
-          setComunityCode(comunity.comunityCode);
-          setGadgets(comunity.comunityCode)
-          navigate("/");
-        }
+        console.log("nice user")
+        sessionStorage.setItem("formBody", formBody)
+        sessionStorage.setItem("member", "persona")
+        console.log(resData);
+        setBool(true);
+        const IdGet = await getIdByMail(resData.email);
+        setId(IdGet);
+        setNombre(resData.nombre);
+        setApellidos(resData.apellidos);
+        setEmail(resData.email);
+        setPassword(resData.password);
+        setPiso(resData.piso);
+        setRol(resData.rol);
+        setComunidades(resData.comunidades);
+        console.log(resData.comunidades[0]);
+
+        const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+        const comunity = await comunityData.json();
+        setIdCom(comunity.id);
+        setCalle(comunity.calle);
+        setNumero(comunity.numero);
+        setCpostal(comunity.cpostal);
+        setComunityCode(comunity.comunityCode);
+        setGadgets(comunity.comunityCode);
+
+        // const instalaciones = await fetch(`${URLBACKEND}/instalacion`);
+        // const instalacionesData = await instalaciones.json();
+        // setInstalaciones(instalacionesData);
+        navigate("/");
+
       } else {
         alert("Usuario o contraseña incorrectos")
       }

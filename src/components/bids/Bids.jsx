@@ -35,6 +35,7 @@ const Bids = (props) => {
     2400: "00:00",
   }
 
+  
   const facilityCard = () => {
     let items = [];
     let zonas = {
@@ -99,4 +100,4 @@ const Bids = (props) => {
   )
 }
 
-export default Bids 
+export default Bids;

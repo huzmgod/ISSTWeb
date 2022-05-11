@@ -151,6 +151,8 @@ function App() {
     setInstalaciones(usefulInstalaciones);
     setVotaciones(usefulVotaciones);
 
+    console.log(instalaciones);
+
 
   };
 
