@@ -14,11 +14,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { URLBACKEND } from '../../constants/constants';
+import CardMeet from '../../components/CardForum/CardMeet';
 
 const Home = () => {
   const navigate = useNavigate();
   const bool = useContext(UserContext).bool;
   const idLocal = useContext(UserContext).id;
+  const rolLocal = useContext(UserContext).rol;
   const comunidades = useContext(UserContext).comunidades;
   const posts = useContext(ComunityContext).posts;
   const votaciones = useContext(ComunityContext).votaciones;
@@ -86,18 +88,30 @@ const Home = () => {
   const forumMeets = () => {
     let items = [];
     for (let i = 0; i < reuniones.length; i++) {
+      const form = {
+        comunityCode:  comunityCode ,
+        key:  i ,
+        id:  reuniones[i].id ,
+        rolLocal:  rolLocal ,
+        titulo:  reuniones[i].motivo ,
+        presencial:  reuniones[i].presencial ,
+        localizacion: reuniones[i].localizacion 
+      }
+      console.log(
+        form
+      )
       items.push(
         <Box className="addVotation" >
           <Box className='description' >
-            <CardVotations
+            <CardMeet
               comunityCode={comunityCode}
               key={i}
               id={reuniones[i].id}
-              idLocal={idLocal}
+              rolLocal={rolLocal}
               titulo={reuniones[i].motivo}
-              autorId={reuniones[i].autor}
-              presencial={votaciones[i].presencial}
-              localizacion={votaciones[i].votantesB}
+              fecha={reuniones[i].fecha}
+              presencial={reuniones[i].presencial}
+              localizacion={reuniones[i].localizacion}
               f5={f5}
               setF5={setF5}
             />
@@ -147,6 +161,10 @@ const Home = () => {
         </div>
         <div className='votations'>
           {forumVotes()}
+
+        </div>
+        <div className='votations'>
+          {forumMeets()}
 
         </div>
         {/* <Header /> */}
