@@ -89,13 +89,13 @@ const Home = () => {
     let items = [];
     for (let i = 0; i < reuniones.length; i++) {
       const form = {
-        comunityCode:  comunityCode ,
-        key:  i ,
-        id:  reuniones[i].id ,
-        rolLocal:  rolLocal ,
-        titulo:  reuniones[i].motivo ,
-        presencial:  reuniones[i].presencial ,
-        localizacion: reuniones[i].localizacion 
+        comunityCode: comunityCode,
+        key: i,
+        id: reuniones[i].id,
+        rolLocal: rolLocal,
+        titulo: reuniones[i].motivo,
+        presencial: reuniones[i].presencial,
+        localizacion: reuniones[i].localizacion
       }
       console.log(
         form
@@ -156,14 +156,17 @@ const Home = () => {
     bool ? (
       <div className='home'>
         <div className='forum'>
+          <h2>POSTS</h2>
           {forumCards()}
 
         </div>
         <div className='votations'>
+          <h2>VOTACIONES</h2>
           {forumVotes()}
 
         </div>
         <div className='votations'>
+          <h2>REUNIONES</h2>
           {forumMeets()}
 
         </div>
