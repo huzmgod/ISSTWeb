@@ -71,6 +71,7 @@ export const Login = () => {
   // const styleClasses = useStyle();
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
+  const utf8 = require('utf8');
   // const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
 
@@ -110,7 +111,7 @@ export const Login = () => {
       let formBody = [];
       for (var property in details) {
         const encodedKey = encodeURIComponent(property);
-        const encodedValue = encodeURIComponent(details[property]);
+        const encodedValue = encodeURIComponent(utf8.encode(details[property]));
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
