@@ -21,5 +21,7 @@ export default React.createContext({
     setPassword: null,
     setPiso: null,
     setRol: null,
-    setComunidades: null
+    setComunidades: null,
+    mantainSession:null,
+    getIdByMail:null
 })

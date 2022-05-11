@@ -18,5 +18,6 @@ export default React.createContext({
     setPosts: null,
     setVotaciones: null,
     setInstalaciones: null,
-    setReuniones: null
+    setReuniones: null,
+    setGadgets: null
 })

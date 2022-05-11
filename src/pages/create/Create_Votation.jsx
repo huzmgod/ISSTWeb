@@ -27,15 +27,14 @@ const Create_Votation = (props) => {
         titulo: tituloVot,
         opcionA: opcionA,
         opcionB: opcionB,
-        autor: autor
+        autor: autor.id,
+        comunityCode: props.comunityCode
     }
 
     const handlePostVot = async () => {
         if (!(tituloVot == '' || opcionA == '' || opcionB == '')) {
             navigate("/")
-            console.log(props.comunityCode)
-            console.log(JSON.stringify({ titulo: tituloVot, opcionA: opcionA, opcionB: opcionB, autor: autor }));
-            const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/votacion`, {
+            const res = await fetch(`${URLBACKEND}/votacion/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

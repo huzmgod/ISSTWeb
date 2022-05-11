@@ -38,6 +38,7 @@ export const Login = () => {
   const setPiso = useContext(UserContext).setPiso;
   const setRol = useContext(UserContext).setRol;
   const setComunidades = useContext(UserContext).setComunidades;
+  const getIdByMail = useContext(UserContext).getIdByMail;
 
   const setIdCom = useContext(ComunityContext).setIdCom;
   const setCalle = useContext(ComunityContext).setCalle;
@@ -47,6 +48,8 @@ export const Login = () => {
   const setPosts = useContext(ComunityContext).setPosts;
   const setVotaciones = useContext(ComunityContext).setVotaciones;
   const setInstalaciones = useContext(ComunityContext).setInstalaciones;
+  const setReuniones = useContext(ComunityContext).setReuniones;
+  const setGadgets = useContext(ComunityContext).setGadgets;
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -95,39 +98,36 @@ export const Login = () => {
 
       const res = await fetch(`${URLBACKEND}/usuario/login?${formBody}`);
 
-      console.log(res);
-
-      if (res.status == 200) {
-      // if (res != null) {
+      if (res.status === 200) {
         const resData = await res.json();
-        console.log(resData);
-        console.log("nice user")
-        sessionStorage.setItem("formBody", formBody)
-        sessionStorage.setItem("member", "persona")
-        console.log(resData);
-        setBool(true);
-        setId(resData.id);
-        setNombre(resData.nombre);
-        setApellidos(resData.apellidos);
-        setEmail(resData.email);
-        setPassword(resData.password);
-        setPiso(resData.piso);
-        setRol(resData.rol);
-        setComunidades(resData.comunidades);
-        console.log(resData.comunidades[0]);
-        const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
-        console.log(comunityData)
-        const comunity = await comunityData.json();
-        console.log(comunityData);
-        setIdCom(comunity.id);
-        setCalle(comunity.calle);
-        setNumero(comunity.numero);
-        setCpostal(comunity.cpostal);
-        setComunityCode(comunity.comunityCode);
-        setPosts(comunity.posts);
-        setVotaciones(comunity.votaciones);
-        setInstalaciones(comunity.instalaciones);
-        navigate("/");
+        console.log(resData)
+        if (resData != null) {
+          console.log("nice user")
+          sessionStorage.setItem("formBody", formBody)
+          sessionStorage.setItem("member", "persona")
+          console.log(resData);
+          setBool(true);
+          const IdGet = await getIdByMail(resData.email);
+          setId(IdGet);
+          setNombre(resData.nombre);
+          setApellidos(resData.apellidos);
+          setEmail(resData.email);
+          setPassword(resData.password);
+          setPiso(resData.piso);
+          setRol(resData.rol);
+          setComunidades(resData.comunidades);
+          console.log(resData.comunidades[0]);
+
+          const comunityData = await fetch(`${URLBACKEND}/comunidad/${resData.comunidades[0]}`);
+          const comunity = await comunityData.json();
+          setIdCom(comunity.id);
+          setCalle(comunity.calle);
+          setNumero(comunity.numero);
+          setCpostal(comunity.cpostal);
+          setComunityCode(comunity.comunityCode);
+          setGadgets(comunity.comunityCode)
+          navigate("/");
+        }
       } else {
         alert("Usuario o contraseña incorrectos")
       }
@@ -135,6 +135,9 @@ export const Login = () => {
     }
   }
   );
+
+
+
 
   const { errors, touched, handleSubmit, getFieldProps } = formik;
   const handleShowPassword = () => {

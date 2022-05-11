@@ -31,14 +31,13 @@ const Create_Meeting = (props) => {
         motivo: motivo,
         fecha: fecha,
         presencial: presencial,
-        localizacion: localizacion
+        localizacion: localizacion,
+        comunityCode:props.comunityCode
     }
 
     const handlePostMeet = async () => {
         if(!(motivo == '' || fecha == '' || localizacion == ''))
         navigate("/")
-        console.log(props.comunityCode)
-        console.log(JSON.stringify({ motivo: motivo, fecha: fecha, presencial: presencial, localizacion: localizacion }));
         const res = await fetch(`${URLBACKEND}/reunion/`, {
             method: "POST",
             headers: {

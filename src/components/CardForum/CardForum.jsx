@@ -34,6 +34,28 @@ export const confirm = createConfirmation(YourDialog);
 export default function CardForum(props) {
   const [expanded, setExpanded] = React.useState(false);
   const [btnPressed, setBtnPressed] = React.useState(false);
+
+  const [authorName, setAuthorName] = React.useState("");
+
+
+
+  const getAuthorName = async () => {
+    const res = await fetch(`${URLBACKEND}/usuario`);
+    const usuarios = await res.json();
+
+    for (const item of usuarios) {
+      if (item.id == props.autorId) {
+        setAuthorName(item.nombre);
+        return;
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    getAuthorName();
+  }
+  );
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -45,15 +67,9 @@ export default function CardForum(props) {
   const handleDelete = async () => {
     props.setF5(!props.f5);
     alert("¿Seguro?. Esta acción no se puede deshacer");
-
-    const res = await fetch(`${URLBACKEND}/comunidad/${props.comunityCode}/post/delete`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: props.id,
-    });
+    const res = await fetch(`${URLBACKEND}/post/delete/${props.id}`);
   }
+
   return (
     <Card sx={{ paddingBottom: '10px', marginBottom: '20px', maxWidth: "97%", backgroundColor: 'white' }}>
       {props.idLocal == props.autorId ? (
@@ -69,7 +85,7 @@ export default function CardForum(props) {
             </IconButton>
           }
           title={props.titulo}
-          subheader={props.autor}
+          subheader={authorName}
         />) : (
         <CardHeader
           avatar={
@@ -78,7 +94,7 @@ export default function CardForum(props) {
             </Avatar>
           }
           title={props.titulo}
-          subheader={props.autor}
+          subheader={authorName}
         />
       )}
       <CardContent>
@@ -88,7 +104,7 @@ export default function CardForum(props) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-         <p style={{fontSize: "15px", fontWeight: "bold"}}><FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed} />90</p>
+          <p style={{ fontSize: "15px", fontWeight: "bold" }}><FavoriteIcon color={btnPressed ? "warning" : "default"} onClick={handleBtnPressed} />{props.upvoted}</p>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />

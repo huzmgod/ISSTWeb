@@ -30,7 +30,6 @@ const Create = (props) => {
     comunidades: props.comunidades
   }
 
-
   const [selection, setSelection] = React.useState('Post');
 
   const handleLangChange = (event) => {
@@ -56,60 +55,10 @@ const Create = (props) => {
         <div className="formGroup">
           <select value={selection} onChange={handleLangChange} style={{ border:'1px solid #000', fontFamily: 'PT Sans'  }}>
             <option value="Post" className='selectPP' style={{ fontFamily: 'PT Sans'}}> Post </option >
-            <option value="Votation" className='selectPP'> Votación </option>
-            <option value="Meeting" className='selectPP'> Reunión </option>
+            <option value="Votation" className='selectPP' style={{ fontFamily: 'PT Sans'}}> Votación </option>
+            <option value="Meeting" className='selectPP' style={{ fontFamily: 'PT Sans'}}> Reunión </option>
           </select >
-          {/* <Select
-            defaultValue={selectedOption}
-            value={selectedOption}
-            onChange={handleLangChange}
-            options={options}
-            isClearable={true}
-            // theme={(theme) => ({
-            //   ...theme,
-            //   colors: {
-            //     ...theme.colors,
-            //     primary: '#24252D',
-            //     primary25: '#24252D',
-            //     primary50: '#24252D',
-            //     primary75: '#24252D',
-            //     neutral0: '#24252D',
-            //     neutral10: '#24252D',
-            //     neutral20: '#24252D',
-            //     neutral30: '#24252D',
-            //     neutral40: '#24252D',
-            //     neutral50: '#24252D',
-            //     neutral60: '#24252D',
-                          
-            //   },
-            // })}
-            
-            styles={{
-              control: (provided) => ({
-                ...provided,
-                border: true ,
-                borderRadius: '3px',
-                backgroundColor: '#24252D',
-                color: '#fff',
-                fontSize: '1.2rem',
-                fontWeight: 'bold',
-                fontFamily: 'PT Sans',
-                padding: '0px',
-                margin: '0px',
-                height: '40px',
-                width: '100%',
-                '&:hover': {
-                  backgroundColor: '#24252D',
-                  color: '#fff',
-                }
-              }
-
-              ),
-            }
-          } */}
-            
-
-          
+                   
           {viewObject()}
         </div >
 
@@ -119,10 +68,6 @@ const Create = (props) => {
         {viewObject()}
       </>
     )
-
-
-
-
   )
 };
 
